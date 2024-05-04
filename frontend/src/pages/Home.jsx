@@ -11,7 +11,7 @@ function Home() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await axios.get('http://localhost:5500'); // Adjust URL as needed
+        const response = await axios.get('http://localhost:3500'); // Adjust URL as needed
         setTickets(response.data);
         setLoading(false);
       } catch (error) {
@@ -39,6 +39,7 @@ function Home() {
                 <th>Price</th>
                 <th>Currency</th>
                 <th>Days Valid</th>
+                <th>Location</th>
               </tr>
             </thead>
             <tbody>
@@ -50,6 +51,7 @@ function Home() {
                   <td>{ticket.price}</td>
                   <td>{ticket.currency}</td>
                   <td>{ticket.daysValid}</td>
+                  <td>{ticket.location}</td>
                 </tr>
               ))}
             </tbody>

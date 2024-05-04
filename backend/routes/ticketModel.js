@@ -23,6 +23,10 @@ const ticketSchema = mongoose.Schema(
         daysValid: {
             type: Number,
             required: true,
+        },
+        location: {
+            type: String,
+            required: true
         }
     }
 );

@@ -10,11 +10,11 @@ import Shop from './pages/Shop';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Contact from './pages/Contact';
-import CreateTicket from './CreateTicket';
-import DeleteTicket from './DeleteTicket';
-import EditTicket from './EditTicket';
+import CreateTicket from './crud/CreateTicket';
+import DeleteTicket from './crud/DeleteTicket';
+import EditTicket from './crud/EditTicket';
 import Home from './pages/Home';
-import ShowTicket from './ShowTicket';
+import ShowTicket from './crud/ShowTicket';
 
 function App() {
   return (
