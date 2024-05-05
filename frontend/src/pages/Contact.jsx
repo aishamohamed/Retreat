@@ -6,7 +6,7 @@ function Contact() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    password: ''
+    message: ''
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -27,16 +27,14 @@ function Contact() {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = 'Email address is invalid';
     }
-    if (!formData.password.trim()) {
-      errors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      errors.password = 'Password must be at least 6 characters long';
+    if (!formData.message.trim()) {
+      errors.message = 'Message is required';
     }
     if (Object.keys(errors).length === 0) {
       // Valid form, can perform further actions like sending feedback to backend
       console.log('Form submitted:', formData);
       // Clear form and navigate
-      setFormData({ fullName: '', email: '', password: '' });
+      setFormData({ fullName: '', email: '', message: '' });
       navigate('/');
     } else {
       // Set errors
@@ -71,15 +69,15 @@ function Contact() {
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="message">Message:</label>
           <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
+            type="text"
+            id="message"
+            name="message"
+            value={formData.message}
             onChange={handleChange}
           />
-          {errors.password && <span className="error">{errors.password}</span>}
+          {errors.message && <span className="error">{errors.message}</span>}
         </div>
         <button type="submit">Submit</button>
       </form>

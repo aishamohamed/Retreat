@@ -13,13 +13,8 @@ function Shop() {
 
   return (
     <div>
-<<<<<<< HEAD
-      <h2>Welcome to Our Shop Department</h2>
-      <p>We are pleased to have you around. Please let us know if you need any assistance. Otherwise, enjoy your visit!</p>
-=======
       <h2>Welcome Celle Retreat Store</h2>
       <p>At Couple Retreats online shop, we are dedicated to providing high-quality products that enhance your relationship and promote intimacy. From romantic gifts to couple activities, we have everything you need to strengthen your bond and create lasting memories together.</p>
->>>>>>> 968ddb5a50e2c625ea51d0664ca0a2b9d5195307
       
       <h2>All Tickets</h2>
       <table className="ticket-table">
