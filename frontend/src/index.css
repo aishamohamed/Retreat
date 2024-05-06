@@ -3,9 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #F6F4F3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,10 +22,13 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
+  width: 100%;
+  height: 100%;
   min-height: 100vh;
+  display: block; /* Changed from flex to block */
+  color: #31241E;
 }
 
 h1 {
@@ -53,6 +54,100 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+/* Navbar styles*/
+.header {
+  width: 100%;
+  background-color: #F6F4F3;
+  margin: 0px;
+  padding: 0px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  /*border-bottom: 1px solid #31241E; /* Solid line */
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 0px;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #F6F4F3;
+  max-height: 100px;
+  max-width: 1200px;
+}
+
+.navbar ul {
+  list-style: none;   
+  padding: 0;        
+  margin: 0;          
+  display: flex; 
+  align-items: center;  
+}
+
+
+.logo {
+  font-size: 24px;
+  color: #31241E;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  padding: 60px;
+}
+
+.navbar-logo {
+  position: absolute;
+  width: auto; 
+  vertical-align: middle; 
+  height: 40px;
+}
+
+.nav-link {
+  color: #31241E;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link:hover, .nav-link:focus, .nav-link.active {
+  color: #B49E81; /* Color for active or hovered links */
+}
+
+.nav-link.active::after, .nav-link:hover::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #B49E81; /* Matching underline for active state */
+  position: absolute;
+  bottom: -2px; /* Adjust based on your layout preference */
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .nav-link {
+    margin-top: 10px;
+  }
+  .logo img {
+    height: 40px;
+  }
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
