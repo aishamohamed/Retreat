@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import '../style/Register.css'
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -42,43 +43,49 @@ function Register() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="register-container">
+      <form onSubmit={handleSubmit} className="register-form">
+        <h2 className="register-h2" >Register</h2>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username" className="register-label">Username</label>
           <input
             type="text"
             id="username"
-            name="username"
+            name="USERNAME"
             value={formData.username}
             onChange={handleChange}
+            className="register-input"
+            placeholder='User1'
           />
-          {errors.username && <span className="error">{errors.username}</span>}
+          {errors.username && <span className="register-error">{errors.username}</span>}
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email" className="register-label">Email</label>
           <input
             type="email"
             id="email"
-            name="email"
+            name="EMAIL"
             value={formData.email}
             onChange={handleChange}
+            className="register-input"
+            placeholder='Homehie@si.com'
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          {errors.email && <span className="register-error">{errors.email}</span>}
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password" className="register-label">Password</label>
           <input
             type="password"
             id="password"
-            name="password"
+            name="PASSWORD"
             value={formData.password}
             onChange={handleChange}
+            className="register-input"
+            placeholder='*****'
           />
-          {errors.password && <span className="error">{errors.password}</span>}
+          {errors.password && <span className="register-error">{errors.password}</span>}
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className='register-button'>Register</button>
       </form>
     </div>
   );
