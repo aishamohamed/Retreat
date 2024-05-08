@@ -1,0 +1,78 @@
+/* login page styles*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #31241E;
+    margin-bottom: 10px;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    color: #31241E;
+    font-size: 16px; 
+    text-align: left; 
+    margin-bottom: 10px;
+}
+
+.login-container {
+    width: 340px;
+    background-color: #F1EBE5;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+}
+  
+.login-container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #C2B2A0;
+    
+}
+  
+.login-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #D1C8C1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+  
+.login-button {
+    width: 60%;
+    padding:  12px 0;
+    background-color: #31241E;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    align-self: center;
+    transition: background-color 0.3s;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.login-button:hover {
+    background-color: #1a1a1a; /* Darker shade on hover */
+}
+
+.error {
+    color: #D14343; /* Red color for error messages */
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}

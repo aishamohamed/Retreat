@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import '../style/login.css';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -38,33 +39,40 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-container1">
+      <div className="login-container">
+        <h2>Login</h2>
+        <p>Sign in to continue</p>
+        <form onSubmit={handleSubmit}>
+          <p>EMAIL</p>
+          <div>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className='login-input'
+              value={formData.email}
+              onChange={handleChange}
+              placeholder='email@somthings.com'
+            />
+            {errors.email && <span className="error">{errors.email}</span>}
+          </div>
+          <p>PASSWORD</p>
+          <div>
+            <input
+              className='login-input'
+              type="password"
+              id="password"
+              name="password"
+              placeholder='************'
+              value={formData.password}
+              onChange={handleChange}
+            />
+            {errors.password && <span className="error">{errors.password}</span>}
+          </div>
+          <button type="submit" className='login-button'>Login</button>
+        </form>
+      </div>
     </div>
   );
 }
