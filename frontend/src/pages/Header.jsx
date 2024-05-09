@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logo.ico';
+import cartIcon from '../shopping_cart.svg';
 
 function Header() {
   return (
@@ -18,6 +19,7 @@ function Header() {
             <li><Link to="/contact" className="nav-link">CONTACT</Link></li>
             <li><Link to="/register" className="nav-link">SIGN UP</Link></li>
             <li><Link to="/login" className="nav-link">LOGIN</Link></li>
+            <li><Link to="/cart" className="nav-link"><img src={cartIcon} alt="Cart Icon"/></Link></li>
           </ul>
         </nav>
       </div>
