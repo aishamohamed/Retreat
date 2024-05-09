@@ -1,7 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await fetch('http://localhost:3500/cart');
+        const data = await response.json();
+        setCartItems(data.items);
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
+  
 
   const removeFromCart = async (itemId) => {
     try {
