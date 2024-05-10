@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useAutoKeys } from "react-easier";
+
 
 // Import components
 import Header from './pages/Header';
@@ -18,6 +20,7 @@ import Home from './pages/Home';
 import ShowTicket from './crud/ShowTicket';
 
 function App() {
+  useAutoKeys();
   return (
     <Router>
       <div>

@@ -1,0 +1,80 @@
+.ticket{
+    display: flex;
+    background-color: #F1EBE5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: auto;
+    margin-bottom: 5px;
+    max-width: 700px;
+    position: relative;
+    margin-top: 15px;
+    align-content: flex-start;
+}
+
+.t-image{
+  margin: 5px;
+  margin-top: 10px;
+  width: 15%;
+  /*height: 150px;*/
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.type-item{
+    font-weight: bold;
+    margin-top: 3px;
+
+
+}
+
+.ticket-item {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3px;
+
+    
+}
+
+
+.ticket-price {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3px;
+    margin-bottom: 3px;
+
+
+}
+
+.ticket-item img{
+    margin-right: 10px;
+    width: 4%;
+
+}
+
+.ticket-price img{
+    margin-right: 5px;
+    width: 6%;
+
+}
+
+.disc{
+    display: inline;
+    padding-left: 20px;
+    padding-right: 150px;
+    }
+
+.buy-btn{
+    background-color: #D1C8C1;
+    /* align-self: baseline; */
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border-radius: 10px;
+    padding: 5px 20px;
+    font-size: 17px;
+    color: white;
+    font-weight: bolder;
+    margin-top: 5px;
+    
+}
+
