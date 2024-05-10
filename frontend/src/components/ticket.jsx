@@ -1,40 +1,49 @@
-
+import { useState } from 'react';
 import "../style/ticket.css";
 
-export default function Ticket(props){
-    let {type, price,currency,daysValid,location} = props;
+export default function Ticket(props) {
+    const { key, type, price, currency, daysValid, location } = props;
+    const [addedToCart, setAddedToCart] = useState(false);
 
-    return(
+    const addToCart = async (ticketKey) => {
+        try {
+            await fetch('http://localhost:3500/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ticket_id: ticketKey })
+            });
+            setAddedToCart(true);
+        } catch (error) {
+            console.error('Error adding item to cart:', error);
+        }
+    };
+
+    return (
         <div className="ticket">
-            <img src={`/${type.toLowerCase()}.jpg`} className="t-image" alt={`${type} icon`}></img>
+            <img src={`/${type.toLowerCase()}.jpg`} className="t-image" alt={`${type} icon`} />
             <div className="disc">
-            <h3>{type.toUpperCase()}</h3>
+                <h3>{type.toUpperCase()}</h3>
 
-            <div className="item-con">
-            <div className="ticket-item">
-            <img src="/calendar.svg" alt="calendar"/>
-            <div className="type-item">{daysValid} days duration</div>
-
+                <div className="item-con">
+                    <div className="ticket-item">
+                        <img src="/calendar.svg" alt="calendar" />
+                        <div className="type-item">{daysValid} days duration</div>
+                    </div>
+                    <div className="ticket-item">
+                        <img src="/location.svg" alt="location" />
+                        <div className="type-item">{location}</div>
+                    </div>
+                    <div className="ticket-price">
+                        <img src="/price-tag.svg" alt="price-tag" />
+                        <div className="type-item">{price} {currency}</div>
+                    </div>
                 </div>
-            <div className="ticket-item">
-            <img src="/location.svg" alt="location"/>
-            <div className="type-item">{location}</div>
-
-                </div>
-                <div className="ticket-price">
-            <img src="/price-tag.svg" alt="price-tag"/>
-            <div className="type-item">{price} USD</div>
-
-
-                </div>
-            
-                </div>   
-
             </div>
-            <button className="buy-btn">BUY</button>
-
-
-
+            <button className="buy-btn" onClick={() => addToCart(key)} disabled={addedToCart}>
+                {addedToCart ? "Added to cart" : "Add to cart"}
+            </button>
         </div>
     )
 }

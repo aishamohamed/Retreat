@@ -78,3 +78,9 @@
     
 }
 
+.buy-btn:disabled{
+    background-color: #b5b0ac;
+    color: rgb(213, 212, 212);
+    cursor: auto;
+}
+
