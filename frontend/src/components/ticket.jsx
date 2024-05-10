@@ -2,10 +2,11 @@ import { useState } from 'react';
 import "../style/ticket.css";
 
 export default function Ticket(props) {
-    const { key, type, price, currency, daysValid, location } = props;
+    const { id, type, price, currency, daysValid, location, inCart } = props;
     const [addedToCart, setAddedToCart] = useState(false);
 
     const addToCart = async (ticketKey) => {
+
         try {
             await fetch('http://localhost:3500/cart/add', {
                 method: 'POST',
@@ -14,6 +15,11 @@ export default function Ticket(props) {
                 },
                 body: JSON.stringify({ ticket_id: ticketKey })
             });
+
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};
+            cartItems[ticketKey] = true;
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
             setAddedToCart(true);
         } catch (error) {
             console.error('Error adding item to cart:', error);
@@ -41,8 +47,8 @@ export default function Ticket(props) {
                     </div>
                 </div>
             </div>
-            <button className="buy-btn" onClick={() => addToCart(key)} disabled={addedToCart}>
-                {addedToCart ? "Added to cart" : "Add to cart"}
+            <button className="buy-btn" onClick={() => addToCart(id)} disabled={inCart || addedToCart}>
+                {inCart || addedToCart ? "Added to cart" : "Add to cart"}
             </button>
         </div>
     )

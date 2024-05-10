@@ -6,23 +6,34 @@ function Shop() {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3500')
-      .then(response => response.json())
-      .then(data => setTickets(data))
-      .catch(error => console.error('Error fetching tickets:', error));
+    const fetchItems = async () => {
+      const storedCartItems = localStorage.getItem('cartItems');
+      const cartItems = JSON.parse(storedCartItems) || {};
+
+      fetch('http://localhost:3500')
+        .then(response => response.json())
+        .then(data => {
+          data.map((ticket) => ticket.inCart = cartItems[ticket._id] ? true : false);
+          setTickets(data);
+        })
+        .catch(error => console.error('Error fetching tickets:', error));
+    }
+
+    fetchItems();
   }, []);
 
   return (
 
     <div className='shop'>
-      {tickets.map(({id,type,price,currency,daysValid,location}) =>
+      {tickets.map(({_id,type,price,currency,daysValid,location,inCart}) =>
       <Ticket
-      key={id}
+      id={_id}
       type={type}
       price={price}
       currency={currency}
       daysValid={daysValid}
       location={location}
+      inCart={inCart}
       /> )}     
     </div>
   );

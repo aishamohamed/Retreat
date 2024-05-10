@@ -6,9 +6,12 @@ function Cart() {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await fetch('http://localhost:3500/cart');
-        const data = await response.json();
-        setCartItems(data.items);
+        const storedCartItems = localStorage.getItem('cartItems');
+        if (storedCartItems) {
+          const parsedCartItems = JSON.parse(storedCartItems);
+          const items = Object.keys(parsedCartItems).map(key => ({ _id: key }));
+          setCartItems(items);
+        }
       } catch (error) {
         console.error('Error fetching cart items:', error);
       }
