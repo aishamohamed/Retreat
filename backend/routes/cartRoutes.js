@@ -4,14 +4,14 @@ import { Cart } from './cartModel.js';
 
 const router = express.Router();
 
-// Middleware to get the user's cart by user ID
-async function getUserCart(req, res, next) {
+// Middleware to get the user's cart by session ID
+async function getSessionCart(req, res, next) {
     try {
-        const userId = req.user.id; 
-        const cart = await Cart.findOne({ userId });
+        const sessionId = req.session_id; 
+        const cart = await Cart.findOne({ sessionId });
         if (!cart) {
             // Create a new cart if not exists
-            const newCart = new Cart({ userId, items: [] });
+            const newCart = new Cart({ sessionId, items: [] });
             await newCart.save();
             res.cart = newCart;
         } else {
@@ -24,9 +24,9 @@ async function getUserCart(req, res, next) {
 }
 
 // Add a ticket to the user's cart
-router.post('/cart/add', getUserCart, async (req, res) => {
+router.post('/cart/add', getSessionCart, async (req, res) => {
     try {
-        const { ticketId } = req.body;
+        const ticketId = req.ticket_id;
         // Add the ticketId to the cart's items array
         res.cart.items.push(ticketId);
         await res.cart.save();
@@ -37,9 +37,9 @@ router.post('/cart/add', getUserCart, async (req, res) => {
 });
 
 // Remove a ticket from the user's cart
-router.delete('/cart/remove/:ticketId', getUserCart, async (req, res) => {
+router.delete('/cart/remove/:ticketId', getSessionCart, async (req, res) => {
     try {
-        const { ticketId } = req.params;
+        const ticketId = req.ticket_id;
         // Remove the ticketId from the cart's items array
         res.cart.items = res.cart.items.filter(item => item !== ticketId);
         await res.cart.save();
@@ -50,9 +50,8 @@ router.delete('/cart/remove/:ticketId', getUserCart, async (req, res) => {
 });
 
 // Purchase tickets in the user's cart
-router.post('/cart/purchase', getUserCart, async (req, res) => {
+router.post('/cart/purchase', getSessionCart, async (req, res) => {
     try {
-        
         res.cart.items = []; // Clear the cart after purchase
         await res.cart.save();
         res.json({ message: 'Purchase successful' });
