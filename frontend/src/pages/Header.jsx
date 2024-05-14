@@ -13,7 +13,7 @@ function Header() {
           <ul>
             <li><Link to="/" className="nav-link">HOME</Link></li>
             <li><Link to="/about" className="nav-link">ABOUT</Link></li>
-            <li><Link to="/retreat" className="nav-link">RETREATES</Link></li>
+            <li><Link to="/retreat" className="nav-link">RETREATS</Link></li>
             <li><Link to="/shop" className="nav-link">SHOP</Link></li>
             <li><Link to="/contact" className="nav-link">CONTACT</Link></li>
             <li><Link to="/register" className="nav-link">SIGN UP</Link></li>

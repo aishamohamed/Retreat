@@ -57,7 +57,7 @@ button:focus-visible {
 }
 
 /* Navbar styles*/
-.header {
+header {
   width: 100%;
   background-color: #F6F4F3;
   margin: 0px;

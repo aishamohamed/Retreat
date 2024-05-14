@@ -12,6 +12,8 @@ function Home() {
     async function fetchTickets() {
       try {
         const response = await axios.get('http://localhost:3500'); // Adjust URL as needed
+        console.log(response)
+
         setTickets(response.data);
         setLoading(false);
       } catch (error) {
