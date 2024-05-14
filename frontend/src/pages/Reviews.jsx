@@ -7,17 +7,23 @@ function Reviews() {
       <div style={{ position: 'relative' }}>
         <div style={{ position: 'absolute', top: 0, right: 0 }}>
           {/* Advertisements */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-            <div style={{ marginBottom: '10px' }}>Yelp</div>
-            <div style={{ marginBottom: '10px' }}>Google</div>
-            <div style={{ marginBottom: '10px' }}>Facebook</div>
-            <div style={{ marginBottom: '10px' }}>Instagram</div>
-            <div style={{ marginBottom: '10px' }}>Apple Pay</div>
+          <div style={{ 
+            backgroundColor: '#ffc107', // Changed background color to a shade of yellow
+            padding: '10px', 
+            borderRadius: '5px' 
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+              <div style={{ marginBottom: '10px' }}>Yelp</div>
+              <div style={{ marginBottom: '10px' }}>Google</div>
+              <div style={{ marginBottom: '10px' }}>Facebook</div>
+              <div style={{ marginBottom: '10px' }}>Instagram</div>
+              <div style={{ marginBottom: '10px' }}>Apple Pay</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <h1>Reviews & TESTIMONIALS</h1>
+      <h1>Reviews & Testimonials</h1>
       <h2><em>Check out our latest reviews.</em></h2>
       <div className="review">
         <img src="/profile-pic1.jpg" alt="Profile Pic" />
@@ -75,4 +81,9 @@ function Reviews() {
 }
 
 export default Reviews;
+
+
+
+
+
 
