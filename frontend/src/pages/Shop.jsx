@@ -34,6 +34,7 @@ function Shop() {
       daysValid={daysValid}
       location={location}
       inCart={inCart}
+      removeFromCart={undefined}
       /> )}     
     </div>
   );

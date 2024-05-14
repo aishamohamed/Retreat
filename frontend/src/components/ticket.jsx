@@ -2,20 +2,12 @@ import { useState } from 'react';
 import "../style/ticket.css";
 
 export default function Ticket(props) {
-    const { id, type, price, currency, daysValid, location, inCart } = props;
+    const { id, type, price, currency, daysValid, location, inCart, removeFromCart } = props;
     const [addedToCart, setAddedToCart] = useState(false);
 
     const addToCart = async (ticketKey) => {
 
         try {
-            await fetch('http://localhost:3500/cart/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ ticket_id: ticketKey })
-            });
-
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};
             cartItems[ticketKey] = true;
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -47,9 +39,15 @@ export default function Ticket(props) {
                     </div>
                 </div>
             </div>
+            { !removeFromCart ? (
             <button className="buy-btn" onClick={() => addToCart(id)} disabled={inCart || addedToCart}>
                 {inCart || addedToCart ? "Added to cart" : "Add to cart"}
             </button>
+            ) : (
+            <button className="buy-btn" onClick={() => removeFromCart(id)}>
+                Remove from cart
+            </button>
+            )}
         </div>
     )
 }
