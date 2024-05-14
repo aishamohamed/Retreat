@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Ticket from '../components/ticket';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -9,8 +10,18 @@ function Cart() {
         const storedCartItems = localStorage.getItem('cartItems');
         if (storedCartItems) {
           const parsedCartItems = JSON.parse(storedCartItems);
-          const items = Object.keys(parsedCartItems).map(key => ({ _id: key }));
-          setCartItems(items);
+          const inCart = Object.keys(parsedCartItems).map(key => ({ _id: key }));
+          console.log(inCart);
+
+          fetch('http://localhost:3500')
+            .then(response => response.json())
+            .then(data => {
+              console.log(inCart);
+              data = data.filter((ticket) => inCart.some(cartItem => cartItem._id === ticket._id));
+              console.log(data);
+              setCartItems(data);
+            })
+            .catch(error => console.error('Error fetching tickets:', error));
         }
       } catch (error) {
         console.error('Error fetching cart items:', error);
@@ -19,19 +30,24 @@ function Cart() {
 
     fetchCartItems();
   }, []);
-  
 
+  
   const removeFromCart = async (itemId) => {
     try {
-      await fetch(`http://localhost:3500/cart/remove/${itemId}`, {
-        method: 'DELETE'
-      });
+      // Update local storage
+      const storedCartItems = localStorage.getItem('cartItems');
+      if (storedCartItems) {
+          const parsedCartItems = JSON.parse(storedCartItems);
+          delete parsedCartItems[itemId];
+          localStorage.setItem('cartItems', JSON.stringify(parsedCartItems));
+      }
+      
       setCartItems(cartItems.filter(item => item._id !== itemId));
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }
-  };
-
+};
+  
   const purchaseCart = async () => {
     try {
       await fetch('http://localhost:3500/cart/purchase', {
@@ -53,42 +69,20 @@ function Cart() {
       <h2>Shopping Cart</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
-      ) : (
-        <table className="cart-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Type</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Currency</th>
-              <th>Days Valid</th>
-              <th>Location</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartItems.map(item => (
-              <tr key={item._id}>
-                <td>{item._id}</td>
-                <td>{item.type}</td>
-                <td>{item.description}</td>
-                <td>{item.price}</td>
-                <td>{ticket.currency}</td>
-                <td>{ticket.daysValid}</td>
-                <td>{ticket.location}</td>
-                <td><button onClick={() => removeFromCart(item._id)}>Remove</button></td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan="3">Total:</td>
-              <td colSpan="2">{calculateTotal()}</td>
-            </tr>
-          </tfoot>
-        </table>
-      )}
+      ) : <div className='shop'>
+      {cartItems.map(({_id,type,price,currency,daysValid,location}) =>
+      <Ticket
+      id={_id}
+      type={type}
+      price={price}
+      currency={currency}
+      daysValid={daysValid}
+      location={location}
+      inCart={true}
+      removeFromCart={removeFromCart}
+      /> )}     
+    </div>
+      }
       {cartItems.length > 0 && (
         <button onClick={purchaseCart}>Purchase</button>
       )}
