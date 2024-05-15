@@ -22,7 +22,7 @@ export default function Ticket(props) {
         <div className="ticket">
             <img src={`/${type.toLowerCase()}.jpg`} className="t-image" alt={`${type} icon`} />
             <div className="disc">
-                <h3>{type.toUpperCase()}</h3>
+                <h3 className="title-item">{type.toUpperCase()}</h3>
 
                 <div className="item-con">
                     <div className="ticket-item">
@@ -44,8 +44,8 @@ export default function Ticket(props) {
                 {inCart || addedToCart ? "Added to cart" : "Add to cart"}
             </button>
             ) : (
-            <button className="buy-btn" onClick={() => removeFromCart(id)}>
-                Remove from cart
+            <button className="bin-btn" onClick={() => removeFromCart(id)}>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
             </button>
             )}
         </div>

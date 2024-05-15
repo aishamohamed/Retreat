@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Ticket from '../components/ticket';
+import "../style/cart.css";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -65,24 +66,26 @@ function Cart() {
   };
 
   return (
-    <div>
+    <div className="cart-container">
       <h2>Shopping Cart</h2>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : <div className='shop'>
-      {cartItems.map(({_id,type,price,currency,daysValid,location}) =>
-      <Ticket
-      id={_id}
-      type={type}
-      price={price}
-      currency={currency}
-      daysValid={daysValid}
-      location={location}
-      inCart={true}
-      removeFromCart={removeFromCart}
-      /> )}     
-    </div>
-      }
+        <p className="empty-message">Your cart is empty.</p>
+      ) : (
+        <div>
+          {cartItems.map(({ _id, type, price, currency, daysValid, location }) => (
+            <Ticket
+              id={_id}
+              type={type}
+              price={price}
+              currency={currency}
+              daysValid={daysValid}
+              location={location}
+              inCart={true}
+              removeFromCart={removeFromCart}
+            />
+          ))}
+        </div>
+      )}
       {cartItems.length > 0 && (
         <button onClick={purchaseCart}>Purchase</button>
       )}

@@ -23,24 +23,26 @@ function App() {
   useAutoKeys();
   return (
     <Router>
-      <div>
+      <div className="body">
         <Header />
         
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/reviews" element={<Reviews />} /> {/* Correct component name */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/faq" element={<FAQ />} /> {}
-          <Route path="/tickets/create" element={<CreateTicket />} />
-          <Route path="/tickets/edit/:id" element={<EditTicket />} />
-          <Route path="/tickets/delete/:id" element={<DeleteTicket />} />
-          <Route path="/tickets/:id" element={<ShowTicket />} />
-        </Routes>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/reviews" element={<Reviews />} /> {/* Correct component name */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/faq" element={<FAQ />} /> {}
+            <Route path="/tickets/create" element={<CreateTicket />} />
+            <Route path="/tickets/edit/:id" element={<EditTicket />} />
+            <Route path="/tickets/delete/:id" element={<DeleteTicket />} />
+            <Route path="/tickets/:id" element={<ShowTicket />} />
+          </Routes>
+        </div>
         
         <Footer />
       </div>

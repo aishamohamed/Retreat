@@ -20,6 +20,10 @@
   border-radius: 2px;
 }
 
+.title-item {
+  text-align: left;
+}
+
 .type-item{
     font-weight: bold;
     margin-top: 3px;
@@ -63,7 +67,7 @@
     padding-right: 150px;
     }
 
-.buy-btn{
+.buy-btn {
     background-color: #D1C8C1;
     /* align-self: baseline; */
     position: absolute;
@@ -75,12 +79,29 @@
     color: white;
     font-weight: bolder;
     margin-top: 5px;
-    
 }
 
-.buy-btn:disabled{
+.buy-btn:disabled {
     background-color: #b5b0ac;
     color: rgb(213, 212, 212);
     cursor: auto;
 }
+
+.bin-btn {
+    background-color: transparent;
+    fill: #000000;
+    border: none;
+    margin: 50px 0 50px 0;
+}
+
+.bin-btn:hover {
+    background-color: transparent;
+    fill: #ff0000;
+}
+
+.bin-btn:focus, .bin-btn:focus-visible {
+    outline: none;
+}
+
+
 
