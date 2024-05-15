@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "../style/home.css";
+
 
 
 function Home() {
@@ -25,39 +27,38 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
+    <div className='main'>
+      <img src="cover.png" className='cover' alt='cover image'/>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div>
-          <h2>All Tickets</h2>
-          <table className="ticket-table"> {/* Apply CSS class */}
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Currency</th>
-                <th>Days Valid</th>
-                <th>Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tickets.map(ticket => (
-                <tr key={ticket._id}>
-                  <td>{ticket._id}</td>
-                  <td>{ticket.type}</td>
-                  <td>{ticket.description}</td>
-                  <td>{ticket.price}</td>
-                  <td>{ticket.currency}</td>
-                  <td>{ticket.daysValid}</td>
-                  <td>{ticket.location}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="ticket-container">
+  {tickets.map((ticket, index) => (
+    <div key={ticket._id} className={`ticket${index % 2 === 0 ?'-right':'-left'}`}>
+      {index % 2 === 0 ? (
+        <>
+          <div className='type-des'>
+            <h3>{ticket.type}</h3>
+            <p>{ticket.description}</p>
+          </div>
+          <img src={`/${ticket.type.toLowerCase()}.jpg`} alt={`Ticket ${index + 1}`} />
+        </>
+      ) : (
+        <>
+          <img src={`/${ticket.type.toLowerCase()}.jpg`} alt={`Ticket ${index + 1}`} />
+          <div className='type-des'>
+            <h3>{ticket.type}</h3>
+
+            <p>{ticket.description}</p>
+          </div>
+        </>
+      )}
+    </div>
+  ))}
+</div>
+
+          
         </div>
       )}
 

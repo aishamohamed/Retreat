@@ -1,0 +1,57 @@
+.main{
+    margin: 40px auto 30px;
+    max-width: 700px;
+}
+
+.img{
+    width: 100%;
+}
+.cover{
+    width: 700px;
+    height: 350px;
+}
+
+
+.ticket-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+
+   }
+
+.ticket-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+
+
+
+   
+}
+
+
+.ticket-left img{
+    width: 300px;
+    height: 250px;
+    float: left;
+
+}
+
+.ticket-right img{
+    width: 300px;
+    height: 250px;
+    float: right;
+
+
+}
+
+.type-des{
+    width: 300px;
+}
