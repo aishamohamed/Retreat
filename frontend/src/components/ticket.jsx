@@ -6,7 +6,6 @@ export default function Ticket(props) {
     const [addedToCart, setAddedToCart] = useState(false);
 
     const addToCart = async (ticketKey) => {
-
         try {
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};
             cartItems[ticketKey] = true;

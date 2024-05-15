@@ -30,12 +30,40 @@ function Login() {
     if (Object.keys(errors).length === 0) {
       // Valid form, can perform further actions like sending data to backend
       console.log('Form submitted:', formData);
+      loginRequest(formData.email, formData.password);
       // Clear form
       setFormData({ email: '', password: '' });
     } else {
       // Set errors
       setErrors(errors);
     }
+  };
+
+  const loginRequest = (email, password) => {
+    fetch('http://localhost:3500/login', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({email: email, password: password})
+    })
+    .then(response => {
+      if (!response.ok) {
+        message = response.json()
+        if(message.error == "email") {
+          setErrors({email: 'Unknown user', password: ''});
+        } else if(message.error == "password") {
+          setErrors({email: '', password: 'Incorrect password'});
+        }
+      }
+      return response.json()
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('There was a problem with the login request:', error);
+    })
   };
 
   return (

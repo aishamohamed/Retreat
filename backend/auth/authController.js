@@ -6,10 +6,10 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email });
-        if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+        if (!user) return res.status(401).json({ error: 'email', message: 'Invalid credentials' });
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+        if (!isMatch) return res.status(401).json({ error: 'password', message: 'Invalid credentials' });
 
         //handle the session ID if you need to store it
         const sessionId = generateSessionId(); // Implement this function based on your needs

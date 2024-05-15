@@ -12,14 +12,11 @@ function Cart() {
         if (storedCartItems) {
           const parsedCartItems = JSON.parse(storedCartItems);
           const inCart = Object.keys(parsedCartItems).map(key => ({ _id: key }));
-          console.log(inCart);
 
           fetch('http://localhost:3500')
             .then(response => response.json())
             .then(data => {
-              console.log(inCart);
               data = data.filter((ticket) => inCart.some(cartItem => cartItem._id === ticket._id));
-              console.log(data);
               setCartItems(data);
             })
             .catch(error => console.error('Error fetching tickets:', error));
@@ -51,11 +48,14 @@ function Cart() {
   
   const purchaseCart = async () => {
     try {
-      await fetch('http://localhost:3500/cart/purchase', {
-        method: 'POST'
-      });
-      setCartItems([]);
-      alert('Purchase successful');
+      const token = localStorage.getItem('token');
+      if(token) {
+        localStorage.setItem('cartItems', JSON.stringify({}));
+        setCartItems([]);
+        alert('Purchase successful');
+      } else {
+        window.location.href = '/login'
+      }
     } catch (error) {
       console.error('Error purchasing cart:', error);
     }
@@ -86,9 +86,9 @@ function Cart() {
           ))}
         </div>
       )}
-      {cartItems.length > 0 && (
+      {cartItems.length > 0 ? (
         <button onClick={purchaseCart}>Purchase</button>
-      )}
+      ) : ""}
     </div>
   );
 }
