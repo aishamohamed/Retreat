@@ -1,6 +1,13 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../routes/userModel.js'; 
+import mongoose from 'mongoose';
+
+
+// Function to generate a session ID
+function generateSessionId() {
+    return new mongoose.Types.ObjectId();
+}
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
@@ -12,7 +19,7 @@ export const login = async (req, res) => {
         if (!isMatch) return res.status(401).json({ error: 'password', message: 'Invalid credentials' });
 
         //handle the session ID if you need to store it
-        const sessionId = generateSessionId(); // Implement this function based on your needs
+        const sessionId = generateSessionId();
         user.sessionId = sessionId;
         await user.save();
 

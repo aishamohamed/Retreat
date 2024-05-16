@@ -10,6 +10,7 @@ import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 import Reviews from './pages/Reviews'; // Correct import name
 import Contact from './pages/Contact';
 import CreateTicket from './crud/CreateTicket';
@@ -36,6 +37,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/reviews" element={<Reviews />} /> {/* Correct component name */}
             <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/faq" element={<FAQ />} /> {}
             <Route path="/tickets/create" element={<CreateTicket />} />
             <Route path="/tickets/edit/:id" element={<EditTicket />} />

@@ -1,6 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import { MongoClient } from 'mongodb';
+import authRoutes from './auth/authRoutes.js'; // Import the authentication routes
+import authenticateToken from './auth/authMiddeleware.js'; // Correct the path
+import dashboardRoutes from './routes/dashboardRoutes.js'; // Correct the path
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -13,9 +21,20 @@ async function startServer() {
     
     console.log('Connecting to database...');
     try {
-        const client = new MongoClient(uri, { useNewUrlParser: true });
-        await client.connect();
+        const uri = "mongodb+srv://Group12:root@cluster0.311kvzz.mongodb.net/agency?retryWrites=true&w=majority";
+    
+        console.log('Connecting to database...');
+        
+
+        await mongoose.connect(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
         console.log("Connected to MongoDB");
+
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        await client.connect();
+        console.log("Connected to MongoDB using MongoClient");
 
         // Access the agency database and ticket collection
         const db = client.db("agency");
@@ -32,6 +51,12 @@ async function startServer() {
                 res.status(500).json({ message: "Failed to fetch data from database" });
             }
         });
+        
+        // Use the authentication routes
+        app.use('/api',authRoutes);
+
+        // Use the dashboard routes
+        app.use(dashboardRoutes);
 
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);

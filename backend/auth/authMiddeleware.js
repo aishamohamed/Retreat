@@ -1,17 +1,24 @@
 import jwt from 'jsonwebtoken';
+import User from '../routes/userModel.js';
 
-// Authentication middleware
-export const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
+
+const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) return res.sendStatus(403);
+    
+    try {
+      const user = await User.findById(decoded.userId);
+      if (!user) return res.sendStatus(403);
+
+      req.user = user;
+      next();
+    } catch (error) {
+      res.sendStatus(500);
     }
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(403).json({ message: 'Invalid token' });
-        }
-        req.user = decoded;
-        next();
-    });
+  });
 };
+
+export default authenticateToken;

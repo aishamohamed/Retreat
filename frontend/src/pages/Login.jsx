@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import '../style/login.css';
 
 function Login() {
@@ -8,6 +9,7 @@ function Login() {
     password: ''
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,7 +42,7 @@ function Login() {
   };
 
   const loginRequest = (email, password) => {
-    fetch('http://localhost:3500/login', {
+    fetch('http://localhost:3500/api/login', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -49,17 +51,21 @@ function Login() {
     })
     .then(response => {
       if (!response.ok) {
-        message = response.json()
-        if(message.error == "email") {
-          setErrors({email: 'Unknown user', password: ''});
-        } else if(message.error == "password") {
-          setErrors({email: '', password: 'Incorrect password'});
-        }
+        return response.json().then(data => {
+          if (data.error === 'email') {
+            setErrors({ email: 'Unknown user', password: '' });
+          } else if (data.error === 'password') {
+            setErrors({ email: '', password: 'Incorrect password' });
+          }
+          throw new Error(data.message || 'Invalid credentials');
+        });
       }
       return response.json()
     })
     .then(data => {
       console.log(data);
+      localStorage.setItem('token', data.token);
+      navigate('/dashboard'); // Redirect to dashboard or any other page after login
     })
     .catch(error => {
       console.error('There was a problem with the login request:', error);
