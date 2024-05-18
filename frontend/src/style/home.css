@@ -3,13 +3,6 @@
     max-width: 700px;
 }
 
-.img{
-    width: 100%;
-}
-.cover{
-    width: 700px;
-    height: 350px;
-}
 
 
 .ticket-container{
@@ -17,41 +10,28 @@
     flex-direction: column;
 }
 
-.ticket-left{
+.ticket-group{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     margin-top: 20px;
-
+    margin-bottom: 20px;
+   
    }
 
-.ticket-right{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 20px;
-
-
-
-   
+.ticket-group img{
+    
+    width: 700px;
+    height: 500px;
+    border-radius: 5px;
 }
 
-
-.ticket-left img{
-    width: 300px;
-    height: 250px;
-    float: left;
-
-}
-
-.ticket-right img{
-    width: 300px;
-    height: 250px;
-    float: right;
+/*Responsive css*/
 
 
-}
 
-.type-des{
-    width: 300px;
-}
+
+
+
+
+

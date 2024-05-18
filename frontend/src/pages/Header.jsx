@@ -16,7 +16,6 @@ function Header() {
             <li><Link to="/retreat" className="nav-link">RETREATS</Link></li>
             <li><Link to="/shop" className="nav-link">SHOP</Link></li>
             <li><Link to="/reviews" className="nav-link">REVIEWS</Link></li>
-            <li><Link to="/contact" className="nav-link">CONTACT</Link></li>
             <li><Link to="/faq" className="nav-link">FAQ & Help</Link></li>
             <li><Link to="/register" className="nav-link">SIGN UP</Link></li>
             <li><Link to="/login" className="nav-link">LOGIN</Link></li>

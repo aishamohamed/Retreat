@@ -27,6 +27,10 @@ const ticketSchema = mongoose.Schema(
         location: {
             type: String,
             required: true
+        },
+        activities:{
+            type: String,
+            required: true
         }
     }
 );
