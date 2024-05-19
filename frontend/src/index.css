@@ -130,12 +130,46 @@ header {
   display: block;
   width: 100%;
   height: 2px;
-  background: #B49E81; /* Matching underline for active state */
+  background: #B49E81; 
   position: absolute;
-  bottom: -2px; /* Adjust based on your layout preference */
+  bottom: -2px;
 }
 
 .nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+.sign-out-button {
+  background: none;
+  border: none;
+  color: #31241E; 
+  cursor: pointer; 
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  margin-left: 20px; 
+  position: relative;
+  display: inline-block;
+}
+
+/* Hover and focus states for .sign-out-button */
+.sign-out-button:hover, .sign-out-button:focus {
+  color: #B49E81;
+  background: none;
+}
+
+/* Add underline on hover and focus */
+.sign-out-button.nav-link.active::after, .sign-out-button:hover::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #B49E81; 
+  position: absolute;
+  bottom: -2px;
+}
+
+.sign-out-button:hover::after, .sign-out-button:focus::after {
   width: 100%;
 }
 

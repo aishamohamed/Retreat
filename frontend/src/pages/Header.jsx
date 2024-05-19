@@ -1,9 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../logo.ico';
 
 function Header() {
+  // logic for signout btn 
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token');
+    navigate('/'); // Redirect to the home page
+  };
+
+  const isLoggedIn = !!localStorage.getItem('token'); // Check if the user is logged in
+
   return (
     <header>
       <div className="navbar">
@@ -16,10 +27,14 @@ function Header() {
             <li><Link to="/retreat" className="nav-link">RETREATS</Link></li>
             <li><Link to="/shop" className="nav-link">SHOP</Link></li>
             <li><Link to="/reviews" className="nav-link">REVIEWS</Link></li>
-            <li><Link to="/contact" className="nav-link">CONTACT</Link></li>
             <li><Link to="/faq" className="nav-link">FAQ & Help</Link></li>
             <li><Link to="/register" className="nav-link">SIGN UP</Link></li>
-            <li><Link to="/login" className="nav-link">LOGIN</Link></li>
+            {isLoggedIn ? (
+              <li><button onClick={handleSignOut} className="nav-link sign-out-button">LOG OUT</button></li>
+            ) : (
+              <li><Link to="/login" className="nav-link">LOGIN</Link></li>
+            )}
+            {isLoggedIn && (<li><Link to="/dashboard" className="nav-link">DASHBOARD</Link></li>)}
             <li><Link to="/cart" className="nav-link"><img src='/shopping_cart.svg' alt="Cart Icon"/></Link></li>
           </ul>
         </nav>

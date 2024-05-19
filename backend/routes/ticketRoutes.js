@@ -28,8 +28,8 @@ function authenticateUser(req, res, next) {
 
 // Middleware for input validation
 function validateInput(req, res, next) {
-    const { type, description, price, currency, daysValid, location } = req.body;
-    if (!type || !description || !price || !currency || !daysValid || !location) {
+    const { type, description, price, currency, daysValid, location, activities } = req.body;
+    if (!type || !description || !price || !currency || !daysValid || !location || !activities) {
         return res.status(400).json({ message: 'All fields are required' });
     }
     next();
@@ -38,8 +38,8 @@ function validateInput(req, res, next) {
 // Create a new ticket
 router.post('/', authenticateUser, validateInput, async (req, res) => {
     try {
-        const { type, description, price, currency, daysValid, location } = req.body;
-        const ticket = new Ticket({ type, description, price, currency, daysValid, location });
+        const { type, description, price, currency, daysValid, location, activities } = req.body;
+        const ticket = new Ticket({ type, description, price, currency, daysValid, location,activities });
         await ticket.save();
         res.status(201).json(ticket);
     } catch (error) {
@@ -65,12 +65,13 @@ router.get('/:id', getTicket, async (req, res) => {
 // Update a ticket by ID
 router.patch('/:id', authenticateUser, getTicket, validateInput, async (req, res) => {
     try {
-        const { type, description, price, currency, daysValid } = req.body;
+        const { type, description, price, currency, daysValid, activities } = req.body;
         res.ticket.type = type;
         res.ticket.description = description;
         res.ticket.price = price;
         res.ticket.currency = currency;
         res.ticket.daysValid = daysValid;
+        res.ticket.activities = activities;
         const updatedTicket = await res.ticket.save();
         res.json(updatedTicket);
     } catch (error) {

@@ -1,0 +1,102 @@
+/* dashboard styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.d-container {
+    margin: 0;
+    padding: 50px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #C2B2A0;
+}
+
+.dashboard-container {
+    background-color: #C2B2A0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #31241E;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #31241E;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    color: #31241E;
+    font-size: 16px; 
+    text-align: left; 
+    margin-bottom: 10px;
+}
+
+.user-information,
+.upcoming-bookings {
+    margin-bottom: 30px;
+}
+
+.user-information p,
+.upcoming-bookings p {
+    margin-bottom: 10px;
+}
+
+.upcoming-bookings ul {
+    list-style: none;
+    padding: 0;
+}
+
+.upcoming-bookings li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.upcoming-bookings li p {
+    margin: 5px 0;
+}
+
+.no-bookings {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+}
+
+.sign-out-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.sign-out-button:hover {
+    background-color: #c9302c;
+}

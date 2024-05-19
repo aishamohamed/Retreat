@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Ticket from '../components/ticket';
+import "../style/ticket.css";
+
 
 function Shop() {
   const [tickets, setTickets] = useState([]);
