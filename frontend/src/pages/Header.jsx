@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 import logo from '../logo.ico';
 
 function Header() {
-  // logic for signout btn 
+  // logic for signout  
   const navigate = useNavigate();
 
   const handleSignOut = () => {
     localStorage.removeItem('token');
-    navigate('/'); // Redirect to the home page
+    navigate('/');
   };
 
-  const isLoggedIn = !!localStorage.getItem('token'); // Check if the user is logged in
+  const isLoggedIn = !!localStorage.getItem('token'); 
 
   return (
     <header>
@@ -26,11 +26,6 @@ function Header() {
             <li><Link to="/about" className="nav-link">ABOUT</Link></li>
             <li><Link to="/retreat" className="nav-link">RETREATS</Link></li>
             <li><Link to="/shop" className="nav-link">SHOP</Link></li>
-<<<<<<< Updated upstream
-            <li><Link to="/reviews" className="nav-link">REVIEWS</Link></li>
-            <li><Link to="/faq" className="nav-link">FAQ & Help</Link></li>
-=======
->>>>>>> Stashed changes
             <li><Link to="/register" className="nav-link">SIGN UP</Link></li>
             {isLoggedIn ? (
               <li><button onClick={handleSignOut} className="nav-link sign-out-button">LOG OUT</button></li>
@@ -47,4 +42,5 @@ function Header() {
 }
 
 export default Header;
+
 
