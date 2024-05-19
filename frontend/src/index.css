@@ -31,7 +31,7 @@ body {
   min-width: 320px;
   width: 100%;
   height: 100%;
-  display: block; /* Changed from flex to block */
+  display: block; 
   color: #31241E;
 }
 
@@ -65,13 +65,13 @@ header {
   background-color: #F6F4F3;
   margin: 0px;
   padding: 0px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  /*border-bottom: 1px solid #31241E; /* Solid line */
+  border-bottom: 1px solid #31241E; 
 }
 
 .navbar {
@@ -122,7 +122,7 @@ header {
 }
 
 .nav-link:hover, .nav-link:focus, .nav-link.active {
-  color: #B49E81; /* Color for active or hovered links */
+  color: #B49E81;
 }
 
 .nav-link.active::after, .nav-link:hover::after {
