@@ -1,13 +1,13 @@
 import express from 'express';
 import cors from 'cors';
-import { MongoClient } from 'mongodb';
-import authRoutes from './auth/authRoutes.js'; // Import the authentication routes
-import authenticateToken from './auth/authMiddeleware.js'; // Correct the path
-import dashboardRoutes from './routes/dashboardRoutes.js'; // Correct the path
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import authRoutes from './auth/authRoutes.js';
+import dashboardRoutes from './routes/dashboardRoute.js';
+import userRoutes from './routes/userRoute.js';
+import cartRoutes from './routes/cartRoute.js';
+import paymentRoutes from './routes/paymentRoute.js'; 
 
-// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
@@ -17,46 +17,34 @@ app.use(cors());
 const PORT = process.env.PORT || 3500;
 
 async function startServer() {
-    const uri = "mongodb+srv://Group12:root@cluster0.311kvzz.mongodb.net/agency?retryWrites=true&w=majority";
+    const uri = process.env.MONGODB_URI || "mongodb+srv://Group12:root@cluster0.311kvzz.mongodb.net/agency?retryWrites=true&w=majority";
     
     console.log('Connecting to database...');
     try {
-        const uri = "mongodb+srv://Group12:root@cluster0.311kvzz.mongodb.net/agency?retryWrites=true&w=majority";
-    
-        console.log('Connecting to database...');
-        
+        await mongoose.connect(uri);
 
-        await mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log("Connected to MongoDB");
+        console.log("Connected to MongoDB using Mongoose");
 
-        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        await client.connect();
-        console.log("Connected to MongoDB using MongoClient");
-
-        // Access the agency database and ticket collection
-        const db = client.db("agency");
-        const ticketCollection = db.collection("ticket");
-
-        // Define a route handler for the root URL ("/") to fetch data from the database
         app.get('/', async (req, res) => {
             try {
-                // Fetch data from the ticket collection
+                const db = mongoose.connection.db;
+                const ticketCollection = db.collection("ticket");
                 const tickets = await ticketCollection.find().toArray();
-                res.json(tickets); // Send the fetched data as JSON response
+                res.json(tickets);
             } catch (error) {
                 console.error("Failed to fetch data from database:", error);
                 res.status(500).json({ message: "Failed to fetch data from database" });
             }
         });
-        
-        // Use the authentication routes
-        app.use('/api',authRoutes);
 
-        // Use the dashboard routes
+        
+        app.use('/cart', cartRoutes);
+
+        app.use('/payment', paymentRoutes);
+
+        app.use('/api', authRoutes);
         app.use(dashboardRoutes);
+        app.use('/user', userRoutes);
 
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
@@ -67,6 +55,21 @@ async function startServer() {
 }
 
 startServer();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

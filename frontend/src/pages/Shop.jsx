@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Ticket from '../components/ticket';
@@ -43,3 +44,4 @@ function Shop() {
 }
 
 export default Shop;
+

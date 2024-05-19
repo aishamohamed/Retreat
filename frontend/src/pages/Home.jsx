@@ -1,10 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import "../style/home.css";
-
-
 
 function Home() {
   const [tickets, setTickets] = useState([]);
@@ -13,8 +10,8 @@ function Home() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await axios.get('http://localhost:3500'); // Adjust URL as needed
-        console.log(response)
+        const response = await axios.get('http://localhost:3500');
+        console.log(response);
 
         setTickets(response.data);
         setLoading(false);
@@ -27,6 +24,7 @@ function Home() {
   }, []);
 
   return (
+<<<<<<< Updated upstream
     <div className='main'>
           <h2>Welcome to Celle Retreats</h2>
 
@@ -71,12 +69,40 @@ function Home() {
         <br />
         <Link to="/tickets/delete/:id">Delete Ticket</Link>
         <br />
+=======
+    <>
+      <div className='cover-container'>
+        <img src="cover.png" className='cover' alt='cover image' />
+>>>>>>> Stashed changes
       </div>
-    </div>
+      <div className='main'>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="ticket-container">
+            {tickets.map((ticket, index) => (
+              <div key={ticket._id} className="ticket">
+                <img src={`/${ticket.type.toLowerCase()}.jpg`} alt={`Ticket ${index + 1}`} />
+                <div className='type-des'>
+                  <h3>{ticket.type}</h3>
+                  <p>{ticket.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
 export default Home;
+
+
+
+
+
+
 
 
 

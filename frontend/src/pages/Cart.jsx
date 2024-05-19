@@ -1,9 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Ticket from '../components/ticket';
 import "../style/cart.css";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paypalEmail, setPaypalEmail] = useState('');
+  const [paypalPassword, setPaypalPassword] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardExpirationDate, setCardExpirationDate] = useState('');
+  const [cardCVV, setCardCVV] = useState('');
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -18,21 +26,23 @@ function Cart() {
             .then(data => {
               data = data.filter((ticket) => inCart.some(cartItem => cartItem._id === ticket._id));
               setCartItems(data);
+              setLoading(false);
             })
             .catch(error => console.error('Error fetching tickets:', error));
+        } else {
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error fetching cart items:', error);
+        setLoading(false);
       }
     };
 
     fetchCartItems();
   }, []);
 
-  
   const removeFromCart = async (itemId) => {
     try {
-      // Update local storage
       const storedCartItems = localStorage.getItem('cartItems');
       if (storedCartItems) {
           const parsedCartItems = JSON.parse(storedCartItems);
@@ -44,20 +54,62 @@ function Cart() {
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }
-};
-  
+  };
+
   const purchaseCart = async () => {
     try {
       const token = localStorage.getItem('token');
       if(token) {
-        localStorage.setItem('cartItems', JSON.stringify({}));
-        setCartItems([]);
-        alert('Purchase successful');
+        if (paymentMethod === 'paypal') {
+          const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: paypalEmail,
+              password: paypalPassword
+            }),
+          };
+          
+          const response = await fetch(`http://localhost:3500/payment/paypal`, requestOptions);
+          const data = await response.json();
+
+          if (response.ok) {
+            localStorage.setItem('cartItems', JSON.stringify({}));
+            setCartItems([]);
+            alert(data.message); //  success message
+          } else {
+            alert(data.message); //  error message
+          }
+        } else if (paymentMethod === 'credit_card' || paymentMethod === 'debit_card') {
+          const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              cardNumber,
+              expirationDate: cardExpirationDate,
+              cvv: cardCVV
+            }),
+          };
+          
+          const response = await fetch(`http://localhost:3500/payment/card`, requestOptions);
+          const data = await response.json();
+
+          if (response.ok) {
+            localStorage.setItem('cartItems', JSON.stringify({}));
+            setCartItems([]);
+            alert(data.message); //  success message
+          } else {
+            alert(data.message); // error message
+          }
+        } else {
+          alert('Please select a payment method');
+        }
       } else {
         window.location.href = '/login'
       }
     } catch (error) {
       console.error('Error purchasing cart:', error);
+      alert('Failed to process payment. Please try again later.');
     }
   };
 
@@ -68,29 +120,83 @@ function Cart() {
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
-      {cartItems.length === 0 ? (
+      {loading ? (
+        <p className="loading-message">Loading...</p>
+      ) : cartItems.length === 0 ? (
         <p className="empty-message">Your cart is empty.</p>
       ) : (
         <div>
-          {cartItems.map(({ _id, type, price, currency, daysValid, location }) => (
-            <Ticket
-              id={_id}
-              type={type}
-              price={price}
-              currency={currency}
-              daysValid={daysValid}
-              location={location}
-              inCart={true}
-              removeFromCart={removeFromCart}
-            />
-          ))}
+          <div>
+            {cartItems.map(({ _id, type, price, currency, daysValid, location }) => (
+              <Ticket
+                key={_id}
+                id={_id}
+                type={type}
+                price={price}
+                currency={currency}
+                daysValid={daysValid}
+                location={location}
+                inCart={true}
+                removeFromCart={removeFromCart}
+              />
+            ))}
+          </div>
+          <div>
+            <p>Total: {calculateTotal()}</p>
+            <button onClick={purchaseCart}>Purchase</button>
+          </div>
+          <div>
+            <label>
+              Select Payment Method:
+              <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+                <option value="">Select...</option>
+                <option value="paypal">PayPal</option>
+                <option value="credit_card">Credit Card</option>
+                <option value="debit_card">Debit Card</option>
+              </select>
+            </label>
+          </div>
+          {paymentMethod === 'paypal' && (
+            <div>
+              <input type="email" value={paypalEmail} onChange={(e) => setPaypalEmail(e.target.value)} placeholder="Enter your PayPal email" />
+              <input type="password" value={paypalPassword} onChange={(e) => setPaypalPassword(e.target.value)} placeholder="Enter your PayPal password" />
+            </div>
+          )}
+          {(paymentMethod === 'credit_card' || paymentMethod === 'debit_card') && (
+            <div>
+              <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="Card Number" />
+              <input type="text" value={cardExpirationDate} onChange={(e) => setCardExpirationDate(e.target.value)} placeholder="Expiration Date (MM/YY)" />
+              <input type="text" value={cardCVV} onChange={(e) => setCardCVV(e.target.value)} placeholder="CVV" />
+            </div>
+          )}
         </div>
       )}
-      {cartItems.length > 0 ? (
-        <button onClick={purchaseCart}>Purchase</button>
-      ) : ""}
     </div>
   );
 }
 
 export default Cart;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
