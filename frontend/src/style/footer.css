@@ -1,0 +1,41 @@
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  footer > div {
+    margin-bottom: 20px;
+  }
+  
+  footer h3, footer h4, footer h5 {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  footer a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  footer a:hover {
+    color: #007bff;
+  }
+  
+  footer p {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  
+  
+  
+    
+  
+  
