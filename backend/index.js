@@ -1,16 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-<<<<<<< Updated upstream
-=======
-import { MongoClient } from 'mongodb';
-import authRoutes from './auth/authRoutes.js'; 
-import authenticateToken from './auth/authMiddeleware.js';
-import dashboardRoutes from './routes/dashboardRoutes.js'; 
-import stripePaymentRouter from './routes/stripePayment.js';
->>>>>>> Stashed changes
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import authRoutes from './auth/authRoutes.js';
+import { MongoClient } from 'mongodb'; 
+import authRoutes from './auth/authRoute.js';
+import authenticateToken from './auth/authMiddleware.js'; 
 import dashboardRoutes from './routes/dashboardRoute.js';
 import userRoutes from './routes/userRoute.js';
 import cartRoutes from './routes/cartRoute.js';
@@ -29,15 +23,8 @@ async function startServer() {
     
     console.log('Connecting to database...');
     try {
-<<<<<<< Updated upstream
         await mongoose.connect(uri);
-
         console.log("Connected to MongoDB using Mongoose");
-
-=======
-
-        await mongoose.connect(uri);
-        console.log("Connected to MongoDB");
 
         const client = new MongoClient(uri);
         await client.connect();
@@ -47,12 +34,8 @@ async function startServer() {
         const db = client.db("agency");
         const ticketCollection = db.collection("ticket");
 
-        // Define a route handler for the root URL ("/") to fetch data from the database
->>>>>>> Stashed changes
         app.get('/', async (req, res) => {
             try {
-                const db = mongoose.connection.db;
-                const ticketCollection = db.collection("ticket");
                 const tickets = await ticketCollection.find().toArray();
                 res.json(tickets);
             } catch (error) {
@@ -61,17 +44,14 @@ async function startServer() {
             }
         });
 
-        
         app.use('/cart', cartRoutes);
-
         app.use('/payment', paymentRoutes);
-
         app.use('/api', authRoutes);
         app.use(dashboardRoutes);
         app.use('/user', userRoutes);
+       
 
-        app.use('/api', stripePaymentRouter); // Use the stripePayment router
-
+        
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });
@@ -81,6 +61,7 @@ async function startServer() {
 }
 
 startServer();
+
 
 
 

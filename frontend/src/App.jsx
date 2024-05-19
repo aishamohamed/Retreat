@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useAutoKeys } from "react-easier";
 
-// Import components
+
 import Header from './pages/Header';
 import Footer from './pages/Footer';
 import About from './pages/About';
@@ -18,15 +18,8 @@ import DeleteTicket from './crud/DeleteTicket';
 import EditTicket from './crud/EditTicket';
 import Home from './pages/Home';
 import ShowTicket from './crud/ShowTicket';
-<<<<<<< Updated upstream
+import PaymentForm from './pages/Payment'; 
 
-
-
-
-=======
-import PaymentForm from './pages/Payment';
-import FAQ from './pages/FAQ'; // Import the FAQ component
->>>>>>> Stashed changes
 
 function App() {
   useAutoKeys();
@@ -41,11 +34,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
-<<<<<<< Updated upstream
-=======
-            <Route path="//create-payment" element={<PaymentForm />} />
-            <Route path="/contact" element={<Contact />} />
->>>>>>> Stashed changes
             <Route path="/register" element={<Register />} />
             <Route path="/retreat" element={<Retreat />} />
             <Route path="/login" element={<Login />} />
@@ -54,6 +42,8 @@ function App() {
             <Route path="/tickets/edit/:id" element={<EditTicket />} />
             <Route path="/tickets/delete/:id" element={<DeleteTicket />} />
             <Route path="/tickets/:id" element={<ShowTicket />} />
+            <Route path="/create-payment" element={<PaymentForm />} />
+           
           </Routes>
         </div>
         
@@ -64,6 +54,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
