@@ -9,14 +9,14 @@ const authenticateToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findById(decoded.userId); // Assuming your token payload uses 'userId'
-    if (!user) return res.sendStatus(403); // Forbidden
+    const user = await User.findById(decoded.userId); 
+    if (!user) return res.sendStatus(403); 
 
     req.user = user;
     next();
   } catch (error) {
     console.error('Token verification or user fetching error:', error);
-    res.sendStatus(403); // Forbidden
+    res.sendStatus(403); 
   }
 };
 

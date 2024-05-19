@@ -17,16 +17,15 @@ async function getTicket(req, res, next) {
     }
 }
 
-// Middleware for user authentication (adjust this according to your authentication mechanism)
 function authenticateUser(req, res, next) {
-    // Example: Check if user is logged in
+    
     if (!req.user) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
     next();
 }
 
-// Middleware for input validation
+
 function validateInput(req, res, next) {
     const { type, description, price, currency, daysValid, location, activities } = req.body;
     if (!type || !description || !price || !currency || !daysValid || !location || !activities) {
@@ -35,7 +34,7 @@ function validateInput(req, res, next) {
     next();
 }
 
-// Create a new ticket
+
 router.post('/', authenticateUser, validateInput, async (req, res) => {
     try {
         const { type, description, price, currency, daysValid, location, activities } = req.body;

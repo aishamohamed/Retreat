@@ -3,7 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb'; 
-import authRoutes from './auth/authRoute.js';
+import authRoutes from './auth/authRoute.js'; 
 import authenticateToken from './auth/authMiddleware.js'; 
 import dashboardRoutes from './routes/dashboardRoute.js';
 import userRoutes from './routes/userRoute.js';
@@ -43,6 +43,7 @@ async function startServer() {
                 res.status(500).json({ message: "Failed to fetch data from database" });
             }
         });
+        app.use('/protected-route', authenticateToken);
 
         app.use('/cart', cartRoutes);
         app.use('/payment', paymentRoutes);
@@ -61,7 +62,6 @@ async function startServer() {
 }
 
 startServer();
-
 
 
 
