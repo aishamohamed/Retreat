@@ -34,6 +34,7 @@ function Header() {
             ) : (
               <li><Link to="/login" className="nav-link">LOGIN</Link></li>
             )}
+            {isLoggedIn && (<li><Link to="/dashboard" className="nav-link">DASHBOARD</Link></li>)}
             <li><Link to="/cart" className="nav-link"><img src='/shopping_cart.svg' alt="Cart Icon"/></Link></li>
           </ul>
         </nav>
