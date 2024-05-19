@@ -1,0 +1,75 @@
+/* Center the container */
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 50vh;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form */
+.payment-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the CardElement */
+.payment-form .StripeElement {
+    padding: 10px;
+    border: 1px solid #d1c8c1;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+/* Style the processing message */
+.processing-message {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #888;
+}
+
+/* Style the error message */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Style the success message */
+.success-message {
+    color: green;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* Style the submit button */
+.payment-form button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #d1c8c1;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.payment-form button:hover {
+    border-color: #646cff;
+}
+
+.payment-form button:focus, .payment-form button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}

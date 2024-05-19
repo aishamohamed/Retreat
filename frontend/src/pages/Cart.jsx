@@ -2,9 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import Ticket from '../components/ticket';
 import "../style/cart.css";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import PaymentForm from './Payment';
+
+const stripePromise = loadStripe('pk_test_51PI9qoAW69DtYWYc4sSVUQ2mHHBGfT1It8K4bMr1WgFQifJlWwZAPA2CdWtZCR5l9wPTtgO8qgcjJHIFkmUPpy2H00vnyFOXRB');
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
+<<<<<<< Updated upstream
   const [loading, setLoading] = useState(true);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [paypalEmail, setPaypalEmail] = useState('');
@@ -12,6 +18,10 @@ function Cart() {
   const [cardNumber, setCardNumber] = useState('');
   const [cardExpirationDate, setCardExpirationDate] = useState('');
   const [cardCVV, setCardCVV] = useState('');
+=======
+  const [isPaymentFormVisible, setIsPaymentFormVisible] = useState(false);
+
+>>>>>>> Stashed changes
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -54,6 +64,7 @@ function Cart() {
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }
+<<<<<<< Updated upstream
   };
 
   const purchaseCart = async () => {
@@ -112,6 +123,20 @@ function Cart() {
       alert('Failed to process payment. Please try again later.');
     }
   };
+=======
+};
+  
+const showPaymentForm = () => {
+  setIsPaymentFormVisible(true);
+};
+
+const handlePaymentSuccess = () => {
+  localStorage.setItem('cartItems', JSON.stringify({}));
+  setCartItems([]);
+  alert('Purchase successful');
+  setIsPaymentFormVisible(false);
+};
+>>>>>>> Stashed changes
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price, 0);
@@ -171,6 +196,22 @@ function Cart() {
           )}
         </div>
       )}
+<<<<<<< Updated upstream
+=======
+      {cartItems.length > 0 && (
+        <>
+          <h3>Total: {calculateTotal()} SEK</h3>
+          <button onClick={showPaymentForm}>
+            Proceed to Payment
+          </button>
+        </>
+      )}
+      {isPaymentFormVisible && (
+        <Elements stripe={stripePromise}>
+          <PaymentForm totalAmount={calculateTotal()} onSuccess={handlePaymentSuccess} />
+        </Elements>
+      )}
+>>>>>>> Stashed changes
     </div>
   );
 }

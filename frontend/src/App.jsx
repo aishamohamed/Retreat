@@ -18,10 +18,15 @@ import DeleteTicket from './crud/DeleteTicket';
 import EditTicket from './crud/EditTicket';
 import Home from './pages/Home';
 import ShowTicket from './crud/ShowTicket';
+<<<<<<< Updated upstream
 
 
 
 
+=======
+import PaymentForm from './pages/Payment';
+import FAQ from './pages/FAQ'; // Import the FAQ component
+>>>>>>> Stashed changes
 
 function App() {
   useAutoKeys();
@@ -36,6 +41,11 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
+<<<<<<< Updated upstream
+=======
+            <Route path="//create-payment" element={<PaymentForm />} />
+            <Route path="/contact" element={<Contact />} />
+>>>>>>> Stashed changes
             <Route path="/register" element={<Register />} />
             <Route path="/retreat" element={<Retreat />} />
             <Route path="/login" element={<Login />} />
