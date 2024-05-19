@@ -35,7 +35,7 @@ function Retreat() {
 
   return (
     <div>
-      <h1 style={{ fontStyle: 'italic', fontSize: '24px' }}>Our Ticketcard</h1>
+      <div className='cart-head'><h1 style={{ fontStyle: 'italic', fontSize: '24px' }}>Our Ticketcard</h1></div>
       {loading ? (
         <p>Loading...</p>
       ) : (

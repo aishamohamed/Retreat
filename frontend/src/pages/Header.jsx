@@ -26,6 +26,7 @@ function Header() {
             <li><Link to="/about" className="nav-link">ABOUT</Link></li>
             <li><Link to="/retreat" className="nav-link">RETREATS</Link></li>
             <li><Link to="/shop" className="nav-link">SHOP</Link></li>
+            <li><Link to="/reviews" className="nav-link">REVIEWS</Link></li>
             <li><Link to="/register" className="nav-link">SIGN UP</Link></li>
             {isLoggedIn ? (
               <li><button onClick={handleSignOut} className="nav-link sign-out-button">LOG OUT</button></li>

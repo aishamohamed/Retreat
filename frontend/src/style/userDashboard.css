@@ -23,7 +23,7 @@
     margin-top: 20px;
 }
 
-h2 {
+.dashboard-container h2 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: #31241E;
@@ -31,7 +31,7 @@ h2 {
     text-align: center;
 }
 
-h3 {
+.dashboard-container h3 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: #31241E;
@@ -40,7 +40,7 @@ h3 {
     padding-bottom: 5px;
 }
 
-p {
+.dashboard-container p {
     font-family: 'Montserrat', sans-serif;
     color: #31241E;
     font-size: 16px; 

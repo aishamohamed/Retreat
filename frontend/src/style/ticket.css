@@ -50,6 +50,14 @@
 
 }
 
+.ticket-item {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3px;
+    
+}
+
+
 .ticket-item img{
     margin-right: 10px;
     width: 4%;

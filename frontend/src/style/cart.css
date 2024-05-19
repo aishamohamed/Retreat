@@ -7,9 +7,9 @@
     color: #333;
   }
   
-  h2 {
+  .cart-container h2 {
     margin-bottom: 20px;
-    font-size: 2rem;
+   font-size: 2rem;
     color: #0056b3;
   }
   
@@ -21,14 +21,14 @@
     color: #555;
   }
   
-  .ticket-list {
+  .cart-container .ticket-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     justify-items: center;
   }
   
-  .ticket {
+  .cart-container .ticket {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -39,21 +39,21 @@
     height: 250px; /* Ensuring a square shape */
   }
   
-  .ticket:hover {
+  .cart-container .ticket:hover {
     transform: translateY(-5px);
     transition: transform 0.3s ease;
   }
   
-  .ticket-details {
+  .cart-container .ticket-details {
     margin-top: 10px;
   }
   
-  .ticket-title {
+  .cart-container .ticket-title {
     font-size: 1.2rem;
     font-weight: bold;
   }
   
-  .ticket-price {
+  .cart-container .ticket-price {
     margin-top: 5px;
     font-size: 1rem;
     color: #007bff;

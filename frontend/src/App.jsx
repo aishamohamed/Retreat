@@ -12,6 +12,8 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Retreat from './pages/Retreat';
+import Reviews from './pages/Reviews'; // Correct import name
+
 import Dashboard from './pages/Dashboard';
 import CreateTicket from './crud/CreateTicket';
 import DeleteTicket from './crud/DeleteTicket';
@@ -36,6 +38,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/register" element={<Register />} />
             <Route path="/retreat" element={<Retreat />} />
+            <Route path="/reviews" element={<Reviews />} /> {/* Correct component name */}
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tickets/create" element={<CreateTicket />} />
