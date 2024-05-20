@@ -13,17 +13,15 @@ function Cart() {
     cardExpirationDate: '',
     cardCVV: ''
   });
+  const [isPaymentMethodVisible, setIsPaymentMethodVisible] = useState(false);
   const [isPaymentFormVisible, setIsPaymentFormVisible] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
-    // is user  logged in
-    const userLoggedIn = localStorage.getItem('token'); 
-
-    // Redirect to login page if  not logged in
+    const userLoggedIn = localStorage.getItem('token');
     if (!userLoggedIn) {
       window.location.href = '/login';
     } else {
-      //  fetch cart items if user is logged in
       fetchCartItems();
     }
   }, []);
@@ -66,18 +64,44 @@ function Cart() {
   const handlePaymentMethodChange = (e) => {
     const { value } = e.target;
     setPaymentData({ ...paymentData, method: value });
+    setIsPaymentFormVisible(true);
   };
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price, 0);
   };
 
-  const handleProceedToPayment = () => {
-    if (paymentData.method === '') {
-      alert('Please select a payment method');
-      return;
-    }
-    setIsPaymentFormVisible(true);
+  const handleProceedToCheckout = () => {
+    setIsPaymentMethodVisible(true);
+  };
+
+  const handlePaymentInputChange = (e) => {
+    const { name, value } = e.target;
+    setPaymentData({ ...paymentData, [name]: value });
+  };
+
+  const handlePaymentSubmit = (e) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    // Handle payment submission logic here
+
+    // Simulating payment processing delay
+    setTimeout(() => {
+      setIsProcessing(false);
+      alert('Payment processed successfully!');
+      setCartItems([]);
+      setPaymentData({
+        method: '',
+        paypalEmail: '',
+        paypalPassword: '',
+        cardNumber: '',
+        cardExpirationDate: '',
+        cardCVV: ''
+      });
+      setIsPaymentMethodVisible(false);
+      setIsPaymentFormVisible(false);
+      localStorage.removeItem('cartItems');
+    }, 2000);
   };
 
   return (
@@ -85,7 +109,7 @@ function Cart() {
       <h2>Shopping Cart</h2>
       {cartItems.length > 0 ? (
         <div>
-          <div>
+          <div className="ticket-list">
             {cartItems.map(({ _id, type, price, currency, daysValid, location }) => (
               <Ticket
                 key={_id}
@@ -100,27 +124,93 @@ function Cart() {
               />
             ))}
           </div>
-          <div>
-            <h3>Total: {calculateTotal()}</h3>
-            <div>
-              <label htmlFor="paymentMethod">Select Payment Method:</label>
-              <select id="paymentMethod" value={paymentData.method} onChange={handlePaymentMethodChange}>
-                <option value="">Select...</option>
-                <option value="paypal">PayPal</option>
-                <option value="credit_card">Credit Card</option>
-                <option value="debit_card">Debit Card</option>
-              </select>
-            </div>
-            <button onClick={handleProceedToPayment}>Proceed to Payment</button>
+          <div className="total-section">
+            <p>Total: {calculateTotal()}</p>
+            {!isPaymentMethodVisible && (
+              <button onClick={handleProceedToCheckout}>Proceed to Checkout</button>
+            )}
+            {isPaymentMethodVisible && (
+              <div>
+                <div className="payment-method-select">
+                  <label htmlFor="paymentMethod">Select Payment Method:</label>
+                  <select id="paymentMethod" value={paymentData.method} onChange={handlePaymentMethodChange}>
+                    <option value="">Select...</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="debit_card">Debit Card</option>
+                  </select>
+                </div>
+                {isPaymentFormVisible && (
+                  <form onSubmit={handlePaymentSubmit} className="payment-details">
+                    {paymentData.method === 'paypal' && (
+                      <div className="paypal-payment">
+                        <div className="form-group">
+                          <label>Email:</label>
+                          <input
+                            type="email"
+                            name="paypalEmail"
+                            value={paymentData.paypalEmail}
+                            onChange={handlePaymentInputChange}
+                            required
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Password:</label>
+                          <input
+                            type="password"
+                            name="paypalPassword"
+                            value={paymentData.paypalPassword}
+                            onChange={handlePaymentInputChange}
+                            required
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {(paymentData.method === 'credit_card' || paymentData.method === 'debit_card') && (
+                      <div className="card-payment">
+                        <div className="form-group">
+                          <label>Card Number:</label>
+                          <input
+                            type="text"
+                            name="cardNumber"
+                            value={paymentData.cardNumber}
+                            onChange={handlePaymentInputChange}
+                            required
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Expiration Date:</label>
+                          <input
+                            type="text"
+                            name="cardExpirationDate"
+                            value={paymentData.cardExpirationDate}
+                            onChange={handlePaymentInputChange}
+                            required
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>CVV:</label>
+                          <input
+                            type="text"
+                            name="cardCVV"
+                            value={paymentData.cardCVV}
+                            onChange={handlePaymentInputChange}
+                            required
+                          />
+                        </div>
+                      </div>
+                    )}
+                    <button type="submit" disabled={isProcessing}>
+                      {isProcessing ? 'Processing...' : 'Pay'}
+                    </button>
+                  </form>
+                )}
+              </div>
+            )}
           </div>
-          {isPaymentFormVisible && (
-            <div>
-              {}
-            </div>
-          )}
         </div>
       ) : (
-        <div>
+        <div className="empty-message">
           <p>Your cart is empty</p>
         </div>
       )}
@@ -129,6 +219,9 @@ function Cart() {
 }
 
 export default Cart;
+
+
+
 
 
 

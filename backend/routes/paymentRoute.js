@@ -1,4 +1,3 @@
-// routes/paymentRoute.js
 import express from 'express';
 import bcrypt from 'bcrypt';
 import { Payment } from '../models/paymentModel.js';
@@ -26,18 +25,14 @@ router.post('/paypal', async (req, res) => {
       return res.status(400).json({ message: 'Password must be at least 6 characters long' });
     }
 
-    const isValidUser = await validateUserCredentials(email, password);
-    if (!isValidUser) {
-      return res.status(401).json({ message: 'Invalid PayPal credentials' });
-    }
-
+    const hashedPassword = await bcrypt.hash(password, 10);
     const payment = new Payment({
       userId,
       paymentMethod: 'paypal',
       paypal: {
         email,
-        password: await bcrypt.hash(password, 10)
-      }
+        password: hashedPassword,
+      },
     });
     await payment.save();
 
@@ -48,45 +43,33 @@ router.post('/paypal', async (req, res) => {
   }
 });
 
-router.post('/card', async (req, res) => {
+router.post('/stripe', async (req, res) => {
   try {
-    const { userId, cardNumber, expirationDate, cvv } = req.body;
+    const { userId, paymentIntentId, cardBrand, last4 } = req.body;
 
-    if (!cardNumber || !expirationDate || !cvv) {
-      return res.status(400).json({ message: 'Card number, expiration date, and CVV are required for card payment' });
-    }
-
-    if (!validateCardNumber(cardNumber)) {
-      return res.status(400).json({ message: 'Invalid card number format' });
-    }
-
-    if (!validateExpirationDate(expirationDate)) {
-      return res.status(400).json({ message: 'Invalid expiration date format' });
-    }
-
-    if (!validateCVV(cvv)) {
-      return res.status(400).json({ message: 'Invalid CVV format' });
+    if (!paymentIntentId || !cardBrand || !last4) {
+      return res.status(400).json({ message: 'Payment Intent ID, card brand, and last 4 digits are required for Stripe payment' });
     }
 
     const payment = new Payment({
       userId,
-      paymentMethod: 'credit_card',
-      creditCard: {
-        cardNumber,
-        expirationDate,
-        cvv
-      }
+      paymentMethod: 'stripe',
+      stripe: {
+        paymentIntentId,
+        cardBrand,
+        last4,
+      },
     });
     await payment.save();
 
-    res.status(200).json({ message: 'Credit/debit card payment successful' });
+    res.status(200).json({ message: 'Stripe payment successful' });
   } catch (error) {
-    console.error('Error processing credit/debit card payment:', error);
-    res.status(500).json({ message: 'Failed to process credit/debit card payment' });
+    console.error('Error processing Stripe payment:', error);
+    res.status(500).json({ message: 'Failed to process Stripe payment' });
   }
 });
 
-router.post('/create-payment', async (req, res) => {
+router.post('/create-payment-intent', async (req, res) => {
   const { amount } = req.body;
 
   try {
@@ -106,24 +89,6 @@ router.post('/create-payment', async (req, res) => {
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
-}
-
-async function validateUserCredentials(email, password) {
-  return email && password;
-}
-
-function validateCardNumber(cardNumber) {
-  const cardNumberRegex = /^\d{10}$/;
-  return cardNumberRegex.test(cardNumber);
-}
-
-function validateExpirationDate(expirationDate) {
-  return expirationDate;
-}
-
-function validateCVV(cvv) {
-  const cvvRegex = /^\d{3}$/;
-  return cvvRegex.test(cvv);
 }
 
 export default router;

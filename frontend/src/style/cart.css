@@ -1,146 +1,136 @@
 .cart-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 120px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-  }
-  
-  .cart-container h2 {
-    margin-bottom: 20px;
-   font-size: 2rem;
-    color: #0056b3;
-  }
-  
-  .loading-message,
-  .empty-message {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #555;
-  }
-  
-  .cart-container .ticket-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    justify-items: center;
-  }
-  
-  .cart-container .ticket {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 250px;
-    height: 250px; /* Ensuring a square shape */
-  }
-  
-  .cart-container .ticket:hover {
-    transform: translateY(-5px);
-    transition: transform 0.3s ease;
-  }
-  
-  .cart-container .ticket-details {
-    margin-top: 10px;
-  }
-  
-  .cart-container .ticket-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  .cart-container .ticket-price {
-    margin-top: 5px;
-    font-size: 1rem;
-    color: #007bff;
-  }
-  
-  .total-section {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .total-section p {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .purchase-section {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .purchase-section button {
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-  }
-  
-  .purchase-section button:hover {
-    background-color: #388e3c;
-  }
-  
-  .payment-method-select {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .payment-method-select label {
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .payment-method-select select {
-    padding: 10px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .payment-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .payment-details input {
-    padding: 10px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-  }
-  
-  .payment-details select {
-    padding: 10px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-  }
-  
-  .empty-message {
-    font-size: 1.5rem;
-    color: #555;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.cart-container h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #0056b3;
+}
+
+.empty-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.ticket-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.ticket {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  height: 250px; /* Ensuring a square shape */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ticket:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.ticket-details {
+  margin-top: 10px;
+}
+
+.ticket-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.ticket-price {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #007bff;
+}
+
+.total-section {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total-section p {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.purchase-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.purchase-section button {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.purchase-section button:hover {
+  background-color: #388e3c;
+}
+
+.payment-method-select {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.payment-method-select label {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.payment-method-select select {
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.payment-details input,
+.payment-details select {
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
   
   
   

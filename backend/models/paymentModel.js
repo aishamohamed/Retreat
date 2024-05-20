@@ -3,48 +3,49 @@ import mongoose from 'mongoose';
 const paypalSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
-const creditCardSchema = new mongoose.Schema({
-  cardNumber: {
+const stripeSchema = new mongoose.Schema({
+  paymentIntentId: {
     type: String,
-    required: true
+    required: true,
   },
-  expirationDate: {
+  cardBrand: {
     type: String,
-    required: true
+    required: true,
   },
-  cvv: {
+  last4: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const paymentSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   },
   paymentMethod: {
     type: String,
-    enum: ['paypal', 'credit_card'],
-    required: true
+    enum: ['paypal', 'stripe'],
+    required: true,
   },
   paypal: paypalSchema,
-  creditCard: creditCardSchema,
+  stripe: stripeSchema,
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-const Payment = mongoose.model("payment", paymentSchema);
+const Payment = mongoose.model('Payment', paymentSchema);
 
 export { Payment };
+
