@@ -28,39 +28,107 @@
   width: 100%;
 }
 
-.ticket {
+.cart-container .ticket{
+  display: flex;
+  background-color: #F1EBE5;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: auto;
+  margin-bottom: 5px;
+  max-width: 700px;
+  position: relative;
+  margin-top: 15px;
+  align-content: flex-start;
+}
+
+.cart-container .t-image {
+margin: 5px;
+margin-top: 10px;
+width: 15%;
+/*height: 150px;*/
+border: 1px solid black;
+border-radius: 2px;
+}
+
+.cart-container .disc {
+  display: inline;
+  padding-left: 20px;
+  padding-right: 150px;
+}
+
+.cart-container .title-item {
+  text-align: left;
+
+
+}
+
+.cart-container .type-item {
+  font-weight: bold;
+  margin-top: 3px;
+}
+
+.cart-container .ticket-price {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3px;
+  margin-bottom: 3px;
+
+
+}
+
+.cart-container .ticket-item {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3px;
+  
+}
+
+
+.cart-container .ticket-item img{
+  margin-right: 10px;
+  width: 4%;
+
+}
+
+.cart-container .ticket-price img{
+  margin-right: 5px;
+  width: 6%;
+
+}
+
+/*.cart-container .ticket {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 250px;
-  height: 250px; /* Ensuring a square shape */
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.ticket:hover {
+.cart-container .ticket:hover {
   transform: translateY(-5px);
   transition: transform 0.3s ease;
 }
 
-.ticket-details {
+.cart-container.ticket-details {
   margin-top: 10px;
 }
 
-.ticket-title {
+/*.cart-container .ticket-title {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-.ticket-price {
+.cart-container .ticket-price {
   margin-top: 5px;
   font-size: 1rem;
   color: #007bff;
-}
+}*/
 
-.total-section {
+.cart-container .total-section {
   margin-top: 20px;
   width: 100%;
   display: flex;
@@ -68,7 +136,7 @@
   align-items: center;
 }
 
-.total-section p {
+.cart-container .total-section p {
   margin-bottom: 10px;
   font-size: 1.2rem;
 }
