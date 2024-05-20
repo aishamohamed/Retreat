@@ -24,10 +24,30 @@
   border-radius: 2px;
 }
 
-.disc {
-    display: inline;
+.disc{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
     padding-left: 20px;
     padding-right: 150px;
+}
+
+.disc-body {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+}
+
+
+#date-picker-input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f1ebe5;
+    box-sizing: border-box;
+    margin-top: 5px;
 }
 
 .title-item {
