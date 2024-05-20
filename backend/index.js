@@ -8,6 +8,7 @@ import authenticateToken from './auth/authMiddleware.js';
 import dashboardRoutes from './routes/dashboardRoute.js';
 import userRoutes from './routes/userRoute.js';
 import cartRoutes from './routes/cartRoute.js';
+import bookingRoutes from './routes/bookingRoutes.js';
 import paymentRoutes from './routes/paymentRoute.js'; 
 
 dotenv.config();
@@ -50,6 +51,7 @@ async function startServer() {
         app.use('/api', authRoutes);
         app.use(dashboardRoutes);
         app.use('/user', userRoutes);
+        app.use('/booking', bookingRoutes);
        
 
         
