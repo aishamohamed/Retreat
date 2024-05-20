@@ -17,14 +17,43 @@ const Dashboard = () => {
         });
 
         setUserData(userResponse.data);
-
-        // Fetch bookings 
-        const upcomingResponse = await axios.get('http://localhost:3500/bookings/upcoming', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        setUpcomingBookings(upcomingResponse.data);
-      } catch (error) {
+      } catch(error) {
         console.error('Error fetching dashboard data:', error);
+
+        // log out if token expired
+        localStorage.removeItem(token);
+        window.location.href = '/login';
+      }
+
+      try {
+        // Fetch bookings 
+        const bookingResponse = await axios.get('http://localhost:3500/booking', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        let bookings = await bookingResponse.data;
+        
+        fetch('http://localhost:3500')
+            .then(response => response.json())
+            .then(data => {
+              // filter tickets on only the booked tickets
+              bookings = bookings.map(booking => {
+                const ticket = data.find(ticket => ticket._id === booking.ticketId);
+                return {
+                  date: booking.date,
+                  location: ticket.location,
+                  description: ticket.description
+                }
+              })
+              
+              // update upcoming bookings state variable
+              setUpcomingBookings(bookings);
+            })
+            .catch(error => console.error('Error fetching tickets:', error));
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
       }
     };
 
