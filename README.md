@@ -66,7 +66,9 @@ Sign up or log in to purchase tickets.
 Add tickets to your cart and proceed to checkout for payment processing.
 
 
+
 API Endpoints
+
 User Routes
 POST /api/user/signup: Sign up a new user.
 POST /api/user/login: Log in an existing user.
@@ -84,6 +86,7 @@ POST /api/payment: Process a payment.
 
 
 License
+
 This project is licensed under the MIT License.
     
  
