@@ -28,7 +28,7 @@ npm start
 npm run dev
 
 
-Backend-Setup
+## Backend-Setup
 
 index.js: Main server file, accessible via npm start.
 config/: Contains the database configuration file.
@@ -45,8 +45,9 @@ userRoute.js: Routes for implementing user sign up details from frontend post to
 paymentRoute.js: Routes for payment to enable users choose between stripe, paypal and secure checkout.
 bookingRoute.js: Routes for booking-related operations.
 
-Frontend Setup
-In the frontend directory, the main structure is as follows
+
+## Frontend Setup
+In the frontend directory, the main structure is as follows:
 
 src/pages/: Directory containing individual page components.
 Header.jsx, Home.jsx, Retreat.jsx, Shop.jsx, Register.jsx, Dashboard.jsx, Review.jsx, Login.jsx, Cart.jsx, Footer.jsx
@@ -56,8 +57,7 @@ App.jsx: Main component of the application.
 index.html: HTML file serving as the entry point for the application.
 
 
-Environment Variables
-The project requires the following environment variables:
+## Environment Variables
 
 MONGODB_URI: Your MongoDB connection string.
 Usage
@@ -67,7 +67,8 @@ Add tickets to your cart and proceed to checkout for payment processing.
 
 
 
-API Endpoints
+
+## API Endpoints
 
 User Routes
 POST /api/user/signup: Sign up a new user.
@@ -85,7 +86,8 @@ Payment Routes
 POST /api/payment: Process a payment.
 
 
-License
+
+## License
 
 This project is licensed under the MIT License.
     
