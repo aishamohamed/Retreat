@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { MongoClient } from 'mongodb'; 
 import authRoutes from './auth/authRoute.js'; 
 import authenticateToken from './auth/authMiddleware.js'; 
 import dashboardRoutes from './routes/dashboardRoute.js';
@@ -12,9 +11,12 @@ import userRoutes from './routes/userRoute.js';
 import cartRoutes from './routes/cartRoute.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import paymentRoutes from './routes/paymentRoute.js'; 
-import ticketRoutes from './routes/ticketRoute.js'; 
+ 
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -30,26 +32,13 @@ async function startServer() {
         await mongoose.connect(uri);
         console.log("Connected to MongoDB using Mongoose");
 
-        const client = new MongoClient(uri);
-        await client.connect();
-        console.log("Connected to MongoDB using MongoClient");
-
-        // Access the agency database and ticket collection
-        const db = client.db("agency");
-        const ticketCollection = db.collection("ticket");
-
-        app.get('/', async (req, res) => {
-            try {
-                const tickets = await ticketCollection.find().toArray();
-                res.json(tickets);
-            } catch (error) {
-                console.error("Failed to fetch data from database:", error);
-                res.status(500).json({ message: "Failed to fetch data from database" });
-            }
+        app.get('/', (req, res) => {
+            res.send("Hello World!");
         });
+
         app.use('/protected-route', authenticateToken);
         
-        app.use('/ticket', ticketRoutes);
+        
         app.use('/cart', cartRoutes);
         app.use('/payment', paymentRoutes);
         app.use('/api', authRoutes);
@@ -57,15 +46,13 @@ async function startServer() {
         app.use('/user', userRoutes);
         app.use('/booking', bookingRoutes);
 
+        // use client app
+        app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
-                            /**
-                 * Serve static files from the frontend build directory.
-                 */
-                const __filename = fileURLToPath(import.meta.url);
-                const __dirname = path.dirname(__filename);
-                app.use(express.static(path.join(__dirname, '../frontend/build')));
-       
-        
+        //Render client for any path
+        app.get('*', (req, res) => res.sendFile(path.join(__dirname, "/client/dist/index.html")));
+
+
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });
