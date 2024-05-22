@@ -35,7 +35,7 @@ const Payment = () => {
 
     if (paymentMethod === 'stripe') {
       try {
-        const { data: { clientSecret } } = await axios.post('http://localhost:3500/api/create-payment-intent', {
+        const { data: { clientSecret } } = await axios.post('https://retreat-c6yw.onrender.com/api/create-payment-intent', {
           amount: 500, // Example amount in kr
         });
 
@@ -68,7 +68,7 @@ const Payment = () => {
       }
     } else if (paymentMethod === 'paypal') {
       try {
-        const response = await axios.post('http://localhost:3500/api/paypal', {
+        const response = await axios.post('https://retreat-c6yw.onrender.com/api/paypal', {
           userId: 'exampleUserId', // Replace with actual user ID
           email: paypalEmail,
           password: paypalPassword,

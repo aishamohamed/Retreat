@@ -13,7 +13,7 @@ function Shop() {
       const storedCartItems = localStorage.getItem('cartItems');
       const cartItems = JSON.parse(storedCartItems) || {};
 
-      fetch('http://localhost:3500')
+      fetch('https://retreat-c6yw.onrender.com')
         .then(response => response.json())
         .then(data => {
           data.map((ticket) => ticket.inCart = cartItems[ticket._id] ? true : false);

@@ -10,7 +10,7 @@ function ShowTicket() {
     <div>
       <h1>Show Ticket Details</h1>
       <p>Ticket ID: {id}</p>
-      {/* Fetch and display ticket details based on the ID */}
+      {/* Fetching and display ticket details based on the ID */}
     </div>
   );
 }

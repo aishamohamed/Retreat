@@ -9,8 +9,7 @@ function DeleteTicket() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await axios.get('http://localhost:5500'); // Adjust URL as needed
-        setTickets(response.data);
+        const response = await axios.get('https://retreat-c6yw.onrender.com/ticket'); 
         setLoading(false);
       } catch (error) {
         console.error('Error fetching tickets:', error);
@@ -21,7 +20,7 @@ function DeleteTicket() {
   }, []);
 
   const handleDelete = (id) => {
-    // Implement delete functionality
+    
     console.log('Delete ticket with ID:', id);
   };
 

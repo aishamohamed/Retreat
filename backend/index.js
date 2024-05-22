@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb'; 
 import authRoutes from './auth/authRoute.js'; 
@@ -10,6 +12,7 @@ import userRoutes from './routes/userRoute.js';
 import cartRoutes from './routes/cartRoute.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import paymentRoutes from './routes/paymentRoute.js'; 
+import ticketRoutes from './routes/ticketRoute.js'; 
 
 dotenv.config();
 
@@ -45,15 +48,23 @@ async function startServer() {
             }
         });
         app.use('/protected-route', authenticateToken);
-
+        
+        app.use('/ticket', ticketRoutes);
         app.use('/cart', cartRoutes);
         app.use('/payment', paymentRoutes);
         app.use('/api', authRoutes);
         app.use(dashboardRoutes);
         app.use('/user', userRoutes);
         app.use('/booking', bookingRoutes);
-       
 
+
+                            /**
+                 * Serve static files from the frontend build directory.
+                 */
+                const __filename = fileURLToPath(import.meta.url);
+                const __dirname = path.dirname(__filename);
+                app.use(express.static(path.join(__dirname, '../frontend/build')));
+       
         
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);

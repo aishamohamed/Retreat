@@ -10,7 +10,7 @@ function EditTickets() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await axios.get('http://localhost:3500'); // Adjust URL as needed
+        const response = await axios.get('https://retreat-c6yw.onrender.com/ticket'); 
         setTickets(response.data);
         setLoading(false);
       } catch (error) {
@@ -22,7 +22,7 @@ function EditTickets() {
   }, []);
 
   const handleEdit = (id) => {
-    // Implement edit functionality
+    
     console.log('Edit ticket with ID:', id);
   };
 

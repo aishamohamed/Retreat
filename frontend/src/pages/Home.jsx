@@ -11,7 +11,7 @@ function Home() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await axios.get('http://localhost:3500');
+        const response = await axios.get('https://retreat-c6yw.onrender.com');
         console.log(response);
         setTickets(response.data);
         setLoading(false);
