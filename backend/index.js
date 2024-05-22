@@ -1,29 +1,22 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import { MongoClient } from 'mongodb'; 
 import authRoutes from './auth/authRoute.js'; 
 import authenticateToken from './auth/authMiddleware.js'; 
 import dashboardRoutes from './routes/dashboardRoute.js';
 import userRoutes from './routes/userRoute.js';
 import cartRoutes from './routes/cartRoute.js';
-import bookingRoutes from './routes/bookingRoutes.js';
 import paymentRoutes from './routes/paymentRoute.js'; 
+import path from 'path'; 
+import { fileURLToPath } from 'url'; 
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
 app.use(express.json());
-
-// Allow requests from your frontend URL
-app.use(cors({
-  origin: 'http://localhost:5173'
-}));
+app.use(cors());
 
 const PORT = process.env.PORT || 3500;
 
@@ -35,25 +28,39 @@ async function startServer() {
         await mongoose.connect(uri);
         console.log("Connected to MongoDB using Mongoose");
 
-        app.get('/', (req, res) => {
-            res.send("Hello World!");
-        });
+        const client = new MongoClient(uri);
+        await client.connect();
+        console.log("Connected to MongoDB using MongoClient");
 
+        // Access the agency database and ticket collection
+        const db = client.db("agency");
+        const ticketCollection = db.collection("ticket");
+
+        app.get('/', async (req, res) => {
+            try {
+                const tickets = await ticketCollection.find().toArray();
+                res.json(tickets);
+            } catch (error) {
+                console.error("Failed to fetch data from database:", error);
+                res.status(500).json({ message: "Failed to fetch data from database" });
+            }
+        });
         app.use('/protected-route', authenticateToken);
-        
+
         app.use('/cart', cartRoutes);
         app.use('/payment', paymentRoutes);
         app.use('/api', authRoutes);
         app.use(dashboardRoutes);
         app.use('/user', userRoutes);
-        app.use('/booking', bookingRoutes);
-
-        // use client app
+       
+        // Serve static files from the client/dist directory
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(__filename);
         app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
-        // Render client for any path
-        app.get('*', (req, res) => res.sendFile(path.join(__dirname, "/client/dist/index.html")));
-
+        // Serve the main HTML file for any other path
+        app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html')));
+        
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });
@@ -63,6 +70,12 @@ async function startServer() {
 }
 
 startServer();
+
+
+
+
+
+
 
 
 

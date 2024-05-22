@@ -91,7 +91,7 @@ function Cart() {
     const token = localStorage.getItem('token');
     try {
       for (let item of cartItems) {
-        await fetch('https://localhost:3500/booking/', {
+        await fetch('http://localhost:3500/booking/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ function Cart() {
   };
 
   const dateFormControl = async () => {
-    // Check if all tickets in cart have a date attached
+    // Checking if all tickets in cart have a date attached
     let valid = true;
     for (let itemId of cartItems.map(item => item._id)) {
       if (!dates[itemId]) {

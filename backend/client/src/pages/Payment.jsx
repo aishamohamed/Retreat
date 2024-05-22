@@ -35,7 +35,7 @@ const Payment = () => {
 
     if (paymentMethod === 'stripe') {
       try {
-        const { data: { clientSecret } } = await axios.post('https://localhost:3500/api/create-payment-intent', {
+        const { data: { clientSecret } } = await axios.post('http://localhost:3500/api/create-payment-intent', {
           amount: 500, // Example amount in kr
         });
 
@@ -43,7 +43,7 @@ const Payment = () => {
           payment_method: {
             card: elements.getElement(CardElement),
             billing_details: {
-              name: 'Cardholder Name', // Replace with actual cardholder name
+              name: 'Cardholder Name', 
             },
           },
         });
@@ -68,8 +68,8 @@ const Payment = () => {
       }
     } else if (paymentMethod === 'paypal') {
       try {
-        const response = await axios.post('https://localhost:3500/api/paypal', {
-          userId: 'exampleUserId', // Replace with actual user ID
+        const response = await axios.post('http://localhost:3500/api/paypal', {
+          userId: 'exampleUserId', 
           email: paypalEmail,
           password: paypalPassword,
         });
