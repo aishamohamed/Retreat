@@ -13,7 +13,7 @@ function Retreat() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await axios.get('https://retreat-c6yw.onrender.com'); // Adjust URL as needed
+        const response = await axios.get('https://localhost:3500'); 
         setTickets(response.data);
         setLoading(false);
       } catch (error) {
@@ -26,7 +26,7 @@ function Retreat() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://retreat-c6yw.onrender.com/${id}`); // Adjust URL as needed
+      await axios.delete(`https://localhost:3500/${id}`); // Adjust URL as needed
       setTickets(tickets.filter(ticket => ticket._id !== id));
     } catch (error) {
       console.error('Error deleting ticket:', error);

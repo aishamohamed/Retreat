@@ -10,7 +10,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const userResponse = await axios.get('https://retreat-c6yw.onrender.com/dashboard', {
+        const userResponse = await axios.get('https://localhost:3500/dashboard', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
       try {
         // Fetch bookings 
-        const bookingResponse = await axios.get('https://retreat-c6yw.onrender.com/booking', {
+        const bookingResponse = await axios.get('https://localhost:3500/booking', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -35,7 +35,7 @@ const Dashboard = () => {
         
         let bookings = await bookingResponse.data;
         
-        fetch('https://retreat-c6yw.onrender.com')
+        fetch('https://localhost:3500')
             .then(response => response.json())
             .then(data => {
               // filter tickets on only the booked tickets

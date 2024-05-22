@@ -25,7 +25,7 @@ function Cart() {
         const parsedCartItems = JSON.parse(storedCartItems);
         const inCart = Object.keys(parsedCartItems).map(key => ({ _id: key }));
 
-        fetch('https://retreat-c6yw.onrender.com')
+        fetch('http://localhost:3500')
           .then(response => response.json())
           .then(data => {
             data = data.filter((ticket) => inCart.some(cartItem => cartItem._id === ticket._id));
@@ -91,7 +91,7 @@ function Cart() {
     const token = localStorage.getItem('token');
     try {
       for (let item of cartItems) {
-        await fetch('https://retreat-c6yw.onrender.com/booking/', {
+        await fetch('https://localhost:3500/booking/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
