@@ -53,13 +53,13 @@ async function startServer() {
         app.use(dashboardRoutes);
         app.use('/user', userRoutes);
        
-        // Serve static files from the client/dist directory
+        // Serving static files from the client/build directory
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
-        app.use(express.static(path.join(__dirname, 'client', 'dist')));
+        app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-        // Serve the main HTML file for any other path
-        app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html')));
+        // Serving the main HTML file for any other path
+        app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')));
         
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
@@ -70,6 +70,7 @@ async function startServer() {
 }
 
 startServer();
+
 
 
 
