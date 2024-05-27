@@ -10,7 +10,7 @@ import userRoutes from './routes/userRoute.js';
 import cartRoutes from './routes/cartRoute.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import paymentRoutes from './routes/paymentRoute.js';
-import ticketRoutes from './routes/ticketRoutes.js'; // Import ticketRoutes
+import ticketRoutes from './routes/ticketRoutes.js'; 
 
 dotenv.config();
 

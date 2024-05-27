@@ -1,7 +1,8 @@
 import express from 'express';
 import authenticateToken from '../auth/authMiddleware.js';
 import Booking from '../models/bookingModel.js';
-import Ticket from '../models/ticketModel.js'; 
+import { Ticket } from '../models/ticketModel.js';
+
 
 const router = express.Router();
 
