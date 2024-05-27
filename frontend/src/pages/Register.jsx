@@ -21,7 +21,7 @@ const Register = () => {
     const emailRegex = /\S+@\S+\.\S+/;
     const passwordRegex = /^.{6,}$/;
 
-    // Simple validation
+    // validation
     const errors = {};
     if (!formData.username.trim()) {
       errors.username = 'Username is required';
