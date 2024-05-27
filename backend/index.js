@@ -5,8 +5,8 @@ import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb'; 
 import authRoutes from './auth/authRoute.js'; 
 import authenticateToken from './auth/authMiddleware.js'; 
-import dashboardRoutes from './routes/dashboardRoute.js';
-import userRoutes from './routes/userRoute.js';
+import dashboardRoutes from './routes/dashboardRoute.js'; // Import dashboard routes
+import bookingRoutes from './routes/bookingRoute.js'; // Import booking routes
 import cartRoutes from './routes/cartRoute.js';
 import paymentRoutes from './routes/paymentRoute.js'; 
 import path from 'path'; 
@@ -32,7 +32,6 @@ async function startServer() {
         await client.connect();
         console.log("Connected to MongoDB using MongoClient");
 
-        // Access the agency database and ticket collection
         const db = client.db("agency");
         const ticketCollection = db.collection("ticket");
 
@@ -45,20 +44,18 @@ async function startServer() {
                 res.status(500).json({ message: "Failed to fetch data from database" });
             }
         });
-        app.use('/protected-route', authenticateToken);
 
+        app.use('/api/auth', authRoutes); 
+        app.use('/protected-route', authenticateToken);
+        app.use('/dashboard', dashboardRoutes); 
+        app.use('/booking', bookingRoutes); 
         app.use('/cart', cartRoutes);
         app.use('/payment', paymentRoutes);
-        app.use('/api', authRoutes);
-        app.use(dashboardRoutes);
-        app.use('/user', userRoutes);
-       
-        // Serving static files from the client/build directory
+        
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
         app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-        // Serving the main HTML file for any other path
         app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')));
         
         app.listen(PORT, () => {
@@ -70,6 +67,8 @@ async function startServer() {
 }
 
 startServer();
+
+
 
 
 

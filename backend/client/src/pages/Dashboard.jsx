@@ -10,50 +10,21 @@ const Dashboard = () => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const userResponse = await axios.get('https://localhost:3500/dashboard', {
+        const userResponse = await axios.get('http://localhost:3500/dashboard', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
 
         setUserData(userResponse.data);
-      } catch(error) {
-        console.error('Error fetching dashboard data:', error);
 
-        // log out if token expired
-        localStorage.removeItem(token);
-        window.location.href = '/login';
-      }
-
-      try {
         // Fetch bookings 
-        const bookingResponse = await axios.get('https://localhost:3500/booking', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
+        const upcomingResponse = await axios.get('http://localhost:3500/bookings/upcoming', {
+            headers: { 'Authorization': `Bearer ${token}` }
         });
-        
-        let bookings = await bookingResponse.data;
-        
-        fetch('https://localhost:3500')
-            .then(response => response.json())
-            .then(data => {
-              // filter tickets on only the booked tickets
-              bookings = bookings.map(booking => {
-                const ticket = data.find(ticket => ticket._id === booking.ticketId);
-                return {
-                  date: booking.date,
-                  location: ticket.location,
-                  description: ticket.description
-                }
-              })
-              
-              // update upcoming bookings state variable
-              setUpcomingBookings(bookings);
-            })
-            .catch(error => console.error('Error fetching tickets:', error));
+        setUpcomingBookings(upcomingResponse.data);
       } catch (error) {
-        console.error('Error fetching bookings:', error);
+        console.error('Error fetching dashboard data:', error);
       }
     };
 
