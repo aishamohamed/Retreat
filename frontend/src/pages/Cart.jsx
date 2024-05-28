@@ -33,7 +33,7 @@ function Cart() {
         const parsedCartItems = JSON.parse(storedCartItems);
         const inCart = Object.keys(parsedCartItems).map(key => ({ _id: key }));
 
-        fetch('http://localhost:3500')
+        fetch('https://retreat-backend-wh82.onrender.com/')
           .then(response => response.json())
           .then(data => {
             data = data.filter((ticket) => inCart.some(cartItem => cartItem._id === ticket._id));

@@ -19,7 +19,7 @@ function CreateTicket() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3500', formData); // Adjust URL as needed
+      await axios.post('https://retreat-backend-wh82.onrender.com/', formData); // Adjust URL as needed
       // Redirect to ticket list or show success message
     } catch (error) {
       console.error('Error creating ticket:', error);

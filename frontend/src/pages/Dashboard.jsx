@@ -10,7 +10,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const userResponse = await axios.get('http://localhost:3500/dashboard', {
+        const userResponse = await axios.get('https://retreat-backend-wh82.onrender.com//dashboard', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -19,7 +19,7 @@ const Dashboard = () => {
         setUserData(userResponse.data);
 
         // Fetch bookings 
-        const upcomingResponse = await axios.get('http://localhost:3500/bookings/upcoming', {
+        const upcomingResponse = await axios.get('https://retreat-backend-wh82.onrender.com//bookings/upcoming', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         setUpcomingBookings(upcomingResponse.data);

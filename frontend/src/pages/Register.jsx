@@ -39,7 +39,7 @@ const Register = () => {
 
     if (Object.keys(errors).length === 0) {
       try {
-        const response = await fetch('http://localhost:3500/user', {
+        const response = await fetch('https://retreat-backend-wh82.onrender.com//user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

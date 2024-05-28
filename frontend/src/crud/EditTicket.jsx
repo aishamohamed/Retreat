@@ -10,7 +10,7 @@ function EditTickets() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const response = await axios.get('http://localhost:3500'); // Adjust URL as needed
+        const response = await axios.get('https://retreat-backend-wh82.onrender.com/'); // Adjust URL as needed
         setTickets(response.data);
         setLoading(false);
       } catch (error) {
