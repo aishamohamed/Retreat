@@ -26,7 +26,7 @@ function Retreat() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://retreat-backend-wh82.onrender.com//${id}`); // Adjust URL as needed
+      await axios.delete(`https://retreat-backend-wh82.onrender.com/${id}`); // Adjust URL as needed
       setTickets(tickets.filter(ticket => ticket._id !== id));
     } catch (error) {
       console.error('Error deleting ticket:', error);
